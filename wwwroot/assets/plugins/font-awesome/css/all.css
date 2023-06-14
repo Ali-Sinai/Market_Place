@@ -1640,7 +1640,7 @@ readers do not read off random characters that represent icons */
 .fa-gauge::before {
   content: "\f624"; }
 
-.fa-dashboard::before {
+.fa-Dashboard::before {
   content: "\f624"; }
 
 .fa-gauge-med::before {

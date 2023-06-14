@@ -5,10 +5,15 @@ namespace Market_Place.Areas.Identity.Data
     public class LoginViewModel
     {
         [Required]
-        [EmailAddress]
-        public string Email { get; set; }
+        [Display(Name = "نام کاربری")]
+        public string UserName { get; set; }
+
         [Required]
         [DataType(DataType.Password)]
+        [Display(Name = "رمزعبور")]
         public string Password { get; set; }
+
+        [Display(Name = "مرا به یاد داشته باش")]
+        public bool RememberMe { get; set; }
     }
 }

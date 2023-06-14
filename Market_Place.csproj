@@ -7,6 +7,8 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.1" />
+    <PackageReference Include="Faker.Net" Version="2.0.154" />
     <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="7.0.5" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="7.0.5" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="7.0.5" />
@@ -27,12 +29,23 @@
     <Folder Include="Areas\Admin\Data\" />
     <Folder Include="Areas\Admin\Models\" />
     <Folder Include="Areas\Identity\Models\" />
+    <Folder Include="Areas\SalesMan\Data\" />
+    <Folder Include="Areas\SalesMan\Models\" />
     <Folder Include="Models\" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\App.Domain.Core.Entities\App.Domain.Core.csproj" />
+    <ProjectReference Include="..\App.Domain.Service\App.Domain.Service.csproj" />
     <ProjectReference Include="..\App.Infrastructur.Data.SqlServer\App.Infrastructure.Data.SqlServer.csproj" />
+    <ProjectReference Include="..\App.Infrastructure.Repository.ef\App.Infrastructure.Repository.ef.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Update="Areas\Identity\Views\Shared\_LoginPartial.cshtml">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
   </ItemGroup>
 
 </Project>

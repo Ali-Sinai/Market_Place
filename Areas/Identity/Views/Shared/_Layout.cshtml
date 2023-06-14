@@ -3,6 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="fontiran.com:license" content="NE29X">
     <title>@ViewData["Title"] - Market_Place</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
@@ -18,7 +19,15 @@
     <link href="~/assets/plugins/iCheck/skins/square/_all.css" rel="stylesheet">
     <link href="~/assets/css/style.css" rel="stylesheet">
     <link href="~/assets/css/colors.css" rel="stylesheet">
-    <!-- END CSS -->
+    <link href="~/assets/plugins/metisMenu/dist/metisMenu.min.css" rel="stylesheet">
+    <link href="~/assets/plugins/font-awesome/css/all.min.css" rel="stylesheet">
+    <link href="~/assets/plugins/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.min.css" rel="stylesheet">
+    <link href="~/assets/plugins/switchery/dist/switchery.min.css" rel="stylesheet">
+    <link href="~/assets/plugins/morris.js/morris.css" rel="stylesheet">
+    <link href="~/assets/plugins/kamadatepicker/kamadatepicker.min.css" rel="stylesheet">
+    <link href="~/assets/css/effects.css" rel="stylesheet">
+    <link href="~/assets/css/yekan.css" rel="stylesheet">
+    <!-- END PAGE CSS -->
 
 </head>
 <body>
@@ -38,10 +47,8 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="Identity" asp-controller="Auth" asp-action="Register">Register</a>
-                        </li>
                     </ul>
+                    <partial name="_LoginPartial"/>
                 </div>
             </div>
         </nav>

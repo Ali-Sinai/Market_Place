@@ -4,6 +4,7 @@
 
 <div class="text-center">
     <h1 class="display-4">Welcome</h1>
-    <button class="btn btn-primary"><a asp-controller="Admin" asp-action="dashboard">admin panel</a></button>
+    <button class="btn btn-primary"><a class="text-white" asp-area="Admin" asp-controller="Admin" asp-action="Dashboard" asp-route-user="@User">admin panel</a></button>
+    <button class="btn btn-primary"><a class="text-white" asp-area="SalesMan" asp-controller="SalesMan" asp-action="Dashboard" asp-route-user="@User">SalesMan panel</a></button>
     <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
 </div>

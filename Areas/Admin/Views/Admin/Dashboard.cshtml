@@ -1,6 +1,4 @@
-﻿@model Market_Place.Areas.Identity.Data.AppUserViewModel
-
-@*
+﻿@*
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
 @{
@@ -8,269 +6,6 @@
 
 
 <!-- BEGIN LOEADING -->
-<div id="loader">
-    <div class="spinner"></div>
-</div><!-- /loader -->
-<!-- END LOEADING -->
-<!-- BEGIN HEADER -->
-<div class="navbar navbar-fixed-top" id="main-navbar">
-<div class="header-right">
-    <a href="Dashboard.cshtml" class="logo-con">
-        <img src="~/assets/images/logo.png" class="img-responsive center-block" alt="لوگو قالب مدیران">
-    </a>
-</div><!-- /.header-right -->
-<div class="header-left">
-<div class="top-bar">
-<ul class="nav navbar-nav navbar-right">
-    <li>
-        <a href="#" class="btn" id="toggle-sidebar">
-            <span class="menu"></span>
-        </a>
-    </li>
-    <li>
-        <a href="#" class="btn open" id="toggle-sidebar-top">
-            <i class="icon-user-following"></i>
-        </a>
-    </li>
-    <li>
-        <a href="#" class="btn" id="toggle-dark-mode">
-            <i class="icon-bulb"></i>
-        </a>
-    </li>
-</ul>
-<ul class="nav navbar-nav navbar-left">
-<li class="dropdown">
-    <a href="#" class="btn" id="toggle-fullscreen">
-        <i class="icon-size-fullscreen"></i>
-    </a>
-</li>
-<li class="dropdown dropdown-messages">
-    <a href="#" class="dropdown-toggle btn" data-bs-toggle="dropdown">
-        <i class="icon-envelope"></i>
-        <span class="badge badge-primary">
-            4
-        </span>
-    </a>
-    <ul class="dropdown-menu has-scrollbar">
-        <li class="dropdown-header clearfix">
-            <span class="float-start">
-                <a href="#" rel="tooltip" title="خواندن همه" data-placement="left">
-                    <i class="icon-eye"></i>
-                </a>
-                شما 4 پیام تازه دارید.
-            </span>
-        </li>
-        <li class="dropdown-body">
-            <ul class="dropdown-menu-list">
-                <li class="clearfix">
-                    <a href="#">
-                        <p class="clearfix">
-                            <strong class="float-start">
-                                <img src="~/assets/images/user/32.png" class="img-circle" alt="">
-                                سهراب سپهری
-                            </strong>
-                            <small class="float-end text-muted">
-                                <i class="icon-clock"></i>
-                                پانزده دقیقه پیش
-                            </small>
-                        </p>
-                        <p>پیام پرمهرتان دریافت شد!</p>
-                    </a>
-                </li>
-                <li class="clearfix">
-                    <a href="#">
-                        <p class="clearfix">
-                            <strong class="float-start">
-                                <img src="~/assets/images/user/32.png" class="img-circle" alt="">
-                                شفیعی کدکنی
-                            </strong>
-                            <small class="float-end text-muted">
-                                <i class="icon-clock"></i>
-                                سی دقیقه پیش
-                            </small>
-                        </p>
-                        <p>بسته ارسالی شما به دستم رسید.</p>
-                    </a>
-                </li>
-                <li class="clearfix">
-                    <a href="#">
-                        <p class="clearfix">
-                            <strong class="float-start">
-                                <img src="~/assets/images/user/32.png" class="img-circle" alt="">
-                                قیصر امین پور
-                            </strong>
-                            <small class="float-end text-muted">
-                                <i class="icon-clock"></i>
-                                یک ساعت پیش
-                            </small>
-                        </p>
-                        <p>مجموعه آثار بنده را ببینید.</p>
-                    </a>
-                </li>
-                <li class="clearfix">
-                    <a href="#">
-                        <p class="clearfix">
-                            <strong class="float-start">
-                                <img src="~/assets/images/user/32.png" class="img-circle" alt="">
-                                مهدی اخوان ثالث
-                            </strong>
-                            <small class="float-end text-muted">
-                                <i class="icon-clock"></i>
-                                دو ساعت پیش
-                            </small>
-                        </p>
-                        <p>با تشکر...</p>
-                    </a>
-                </li>
-            </ul>
-        </li>
-        <li class="dropdown-footer clearfix">
-            <a href="#">
-                <i class="icon-list fa-flip-horizontal"></i>
-                مشاهده همه پیام ها
-            </a>
-        </li>
-    </ul>
-</li>
-<li class="dropdown dropdown-announces">
-    <a href="#" class="dropdown-toggle btn" data-bs-toggle="dropdown">
-        <i class="icon-bell"></i>
-        <span class="badge badge-warning">
-            5
-        </span>
-    </a>
-    <ul class="dropdown-menu has-scrollbar">
-        <li class="dropdown-header clearfix">
-            <span class="float-start">
-                <a href="#" rel="tooltip" title="خواندن همه" data-placement="left">
-                    <i class="icon-eye"></i>
-                </a>
-                <span>
-                    شما 8 اعلان تازه دارید.
-                </span>
-            </span>
-
-        </li>
-        <li class="dropdown-body">
-            <ul class="dropdown-menu-list">
-                <li class="clearfix">
-                    <a href="#">
-                        <p class="clearfix">
-                            <strong class="float-start">عباس دوران</strong>
-                            <small class="float-end text-muted">
-                                <i class="icon-clock"></i>
-                                21:30
-                            </small>
-                        </p>
-                        <p>بسته ارسالی شما به دستم رسید.</p>
-                    </a>
-                </li>
-                <li class="clearfix">
-                    <a href="#">
-                        <p class="clearfix">
-                            <strong class="float-start">حسن باقری</strong>
-                            <small class="float-end text-muted">
-                                <i class="icon-clock"></i>
-                                20:20
-                            </small>
-                        </p>
-                        <p>از محبت شما ممنونم.</p>
-                    </a>
-                </li>
-                <li class="clearfix">
-                    <a href="#">
-                        <p class="clearfix">
-                            <strong class="float-start">مدیر کل</strong>
-                            <small class="float-end text-muted">
-                                <i class="icon-clock"></i>
-                                19:20
-                            </small>
-                        </p>
-                        <p>سفارش شما ارسال گردید..</p>
-                    </a>
-                </li>
-                <li class="clearfix">
-                    <a href="#">
-                        <p class="clearfix">
-                            <strong class="float-start">مدیر مالی</strong>
-                            <small class="float-end text-muted">
-                                <i class="icon-clock"></i>
-                                17:40
-                            </small>
-                        </p>
-                        <p>درخواست فیش حقوقی</p>
-                    </a>
-                </li>
-                <li class="clearfix">
-                    <a href="#">
-                        <p class="clearfix">
-                            <strong class="float-start">ابراهیم همت</strong>
-                            <small class="float-end text-muted">
-                                <i class="icon-clock"></i>
-                                15:45
-                            </small>
-                        </p>
-                        <p>پیام های مرا دنبال کنید.</p>
-                    </a>
-                </li>
-            </ul>
-        </li>
-        <li class="dropdown-footer clearfix">
-            <a href="#">
-                <i class="icon-list fa-flip-horizontal"></i>
-                مشاهده همه اعلانات
-            </a>
-        </li>
-    </ul>
-</li>
-
-<li class="dropdown dropdown-user">
-    <a href="#" class="dropdown-toggle dropdown-hover" data-bs-toggle="dropdown">
-        <img src="~/assets/images/user/48.png" alt="عکس پرفایل" class="img-circle img-responsive">
-        <span>حمید آفرینش فر</span>
-        <i class="icon-arrow-down"></i>
-    </a>
-    <ul class="dropdown-menu">
-        <li>
-            <a href="edit_profile.html">
-                <i class="icon-note"></i>
-                ویرایش پروفایل
-            </a>
-        </li>
-        <li>
-            <a href="change_password.html">
-                <i class="icon-key"></i>
-                تغییر رمز عبور
-            </a>
-        </li>
-        <li class="divider"></li>
-        <li>
-            <a href="chat.html">
-                <span class="badge badge-primary float-end"> 14 </span>
-                <i class="icon-envelope"></i>
-                تیکت های جدید
-            </a>
-        </li>
-        <li>
-            <a href="#">
-                <i class="icon-wallet"></i>
-                کیف پول
-            </a>
-        </li>
-        <li class="divider"></li>
-        <li>
-            <a href="login.html">
-                <i class="icon-power"></i>
-                خروج
-            </a>
-        </li>
-    </ul>
-</li>
-</ul><!-- /.navbar-left -->
-</div><!-- /.top-bar -->
-</div><!-- /.header-left -->
-</div><!-- /.navbar -->
-<!-- END HEADER -->
 <!-- BEGIN WRAPPER -->
 <div id="wrapper">
 
@@ -294,7 +29,7 @@
             <img src="~/assets/images/user/128.png" alt="عکس پروفایل" class="img-circle img-responsive">
         </a>
         <div class="user-details">
-            <h4>حمید آفرینش فر</h4>
+            <h4>@ViewBag.AdminDto.UserName</h4>
             <p class="role">مدیر فنی</p>
             <div class="dropdown user-login">
                 <button class="btn btn-xs btn-status dropdown-toggle btn-round" type="button" data-bs-toggle="dropdown" data-hover="dropdown">
@@ -336,31 +71,55 @@
 <li class="open active conditional-bg">
     <a href="#" class="dropdown-toggle">
         <i class="icon-home"></i>
-        <span>پیشخوان</span>
+        <span>عملیات</span>
     </a>
     <ul>
         <li>
-            <a href="dashboard.html" class="current">
+            <a asp-area="Admin" asp-controller="Admin" asp-action="EditCustomer" class="current">
                 <i class="icon-home"></i>
-                <span>پیشخوان یک</span>
+                <span>ویرایش خریدار</span>
             </a>
         </li>
         <li>
-            <a href="dashboard2.html" class="">
+            <a asp-area="Admin" asp-controller="Admin" asp-action="DeleteCustomer" class="">
                 <i class="icon-home"></i>
-                <span>پیشخوان دو</span>
+                <span>حذف خریدار</span>
             </a>
         </li>
         <li>
-            <a href="parastoo.html" class="">
+            <a asp-area="Admin" asp-controller="Admin" asp-action="EditBooth" class="">
                 <i class="icon-home"></i>
-                <span>پیشخوان با فونت پرستو</span>
+                <span>ویرایش غرفه</span>
             </a>
         </li>
         <li>
-            <a href="yekan.html" class="">
+            <a asp-area="Admin" asp-controller="Admin" asp-action="DeleteBooth" class="">
                 <i class="icon-home"></i>
-                <span>پیشخوان با فونت یکان</span>
+                <span>حذف غرفه</span>
+            </a>
+        </li>
+        <li>
+            <a asp-area="Admin" asp-controller="Admin" asp-action="EditProduct" class="">
+                <i class="icon-home"></i>
+                <span>ویرایش محصول</span>
+            </a>
+        </li>
+        <li>
+            <a asp-area="Admin" asp-controller="Admin" asp-action="DeleteProduct" class="">
+                <i class="icon-home"></i>
+                <span>حذف محصول</span>
+            </a>
+        </li>
+        <li>
+            <a asp-area="Admin" asp-controller="Admin" asp-action="ConfirmProductsPage" class="">
+                <i class="icon-home"></i>
+                <span>تایید یا رد محصولات</span>
+            </a>
+        </li>
+        <li>
+            <a asp-area="Admin" asp-controller="Admin" asp-action="ConfirmComment" class="">
+                <i class="icon-home"></i>
+                <span>تایید یا رد کامنت ها</span>
             </a>
         </li>
     </ul>
@@ -719,7 +478,7 @@
     <div class="breadcrumb-box border shadow">
         <ul class="breadcrumb">
             <li>
-                <a href="dashboard.html">پیشخوان</a>
+                <a href="Dashboard.html">پیشخوان</a>
             </li>
         </ul>
         <div class="breadcrumb-left">
@@ -828,12 +587,12 @@
 
 <div class="row">
     <div class="col-md-6 col-xs-12">
-        <div class="portlet box border shadow">
+        <div class="portlet box border shadow" display="None">
             <div class="portlet-heading">
                 <div class="portlet-title">
                     <h3 class="title">
                         <i class="icon-pie-chart"></i>
-                        میانگین بازدید
+                        کامنت های تایید نشده
                     </h3>
                 </div><!-- /.portlet-title -->
                 <div class="buttons-box">
@@ -842,29 +601,25 @@
                     </a>
                     <div class="code-modal hide">
                         <!--
-                        // HTML
-                        <div id="donut" class="morris-chart"></div>
-
-                        //JS
-                        <script>
-                                                Morris.Donut({
-                                                    element: 'donut',
-                                                    data: [
-                                                        {value: 256, label: 'صبح', formatted: '256 نفر'},
-                                                        {value: 512, label: 'ظهر', formatted: '512 نفر'},
-                                                        {value: 1024, label: 'عصر', formatted: '1024 نفر'},
-                                                        {value: 2048, label: 'شب', formatted: '2048 نفر'}
-                                                    ],
-                                                        colors: [
-                                                        '#ffbd15',
-                                                        '#f55145',
-                                                        '#13a2a6',
-                                                        '#14B9D6'
-                                                    ],
-                                                    formatter: function (x, data) { return data.formatted; },
-                                                    resize: true
-                                                });
-                                            </script>
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th scope="col">ProductID</th>
+                                <th scope="col">Customer UserName</th>
+                                <th scope="col">Comment</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            @foreach (var item in ViewBag.CommentsNotConfirmed)
+                            {
+                                <tr>
+                                    <td>@item.Id</td>
+                                    <td>@item.CustomerId</td>
+                                        <td>@item.Message</td>
+                                </tr>
+                            }
+                        </tbody>
+                        </table>
                         -->
                     </div>
                     <a class="btn btn-sm btn-default btn-round btn-fullscreen" rel="tooltip" title="تمام صفحه" href="#">
@@ -875,11 +630,38 @@
                     </a>
                 </div><!-- /.buttons-box -->
             </div><!-- /.portlet-heading -->
+
             <div class="portlet-body">
-                <div id="donut" class="morris-chart"></div>
+                <div class="container">
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th scope="col">ProductID</th>
+                            <th scope="col">Customer UserName</th>
+                            <th scope="col">Comment</th>
+                            <th scope="col">Operation</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        @foreach (var item in ViewBag.CommentsNotConfirmed)
+                        {
+                            <tr>
+                                <td>@item.Id</td>
+                                <td>@item.CustomerId</td>
+                                <td>@item.Message</td>
+                                <td>
+                                    <button class="btn btn-success" asp-area="Admin" asp-controller="Admin" asp-action="ConfirmProduct" asp-route-confirmed="true">Confirm</button>
+                                    <button class="btn btn-warning" asp-area="Admin" asp-controller="Admin" asp-action="ConfirmProduct" asp-route-confirmed="false">Deny</button>
+                                </td>
+                            </tr>
+                        }
+                        </tbody>
+                    </table>
+                </div>
             </div><!-- /.portlet-body -->
         </div><!-- /.portlet -->
     </div><!-- /.col-md-6 -->
+
     <div class="col-md-6 col-xs-12">
         <div class="portlet box border shadow">
             <div class="portlet-heading">
@@ -2017,5 +1799,5 @@
 <script src="~/assets/plugins/ammap3/ammap/maps/js/iranHighFa.js"></script>
 <script src="~/assets/plugins/kamadatepicker/kamadatepicker.min.js"></script>
 <script src="~/assets/plugins/jquery-knob/dist/jquery.knob.min.js"></script>
-<script src="~/assets/js/pages/dashboard1.js"></script>
+<script src="~/assets/js/pages/Dashboard1.js"></script>
 <!-- END PAGE JAVASCRIPT -->

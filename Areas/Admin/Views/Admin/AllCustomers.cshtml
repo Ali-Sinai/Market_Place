@@ -1,0 +1,30 @@
+﻿@model List<App.Domain.Core.Entities.Customer>
+@{
+}
+
+<div class="container">
+        <table class="table">
+        <thead>
+        <tr>
+        <th scope="col">Customer ID</th>
+        <th scope="col">Name</th>
+        <th scope="col">UserName</th>
+        <th scope="col">Operation</th>
+        </tr>
+        </thead>
+        <tbody>
+         @foreach (var item in Model)
+         {
+             <tr>
+                 <td><a asp-area="Admin" asp-controller="Admin" asp-action="EditCustomer">@item.Id</a></td>
+                 <td>@item.FirstName @item.LastName</td>
+                 <td>@item.UserName</td>
+                 <td>
+                     <button class="btn btn-success" asp-area="Admin" asp-controller="Admin" asp-action="EditCustomer">Edit</button>
+                     <button class="btn btn-warning" asp-area="Admin" asp-controller="Admin" asp-action="DeleteCustomer" asp-route-customerId="@item.Id">Delete</button>
+                 </td>
+             </tr>
+         }
+    </tbody>
+    </table>
+</div>

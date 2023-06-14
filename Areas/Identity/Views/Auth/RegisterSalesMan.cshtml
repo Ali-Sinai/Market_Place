@@ -1,6 +1,6 @@
-﻿@model Market_Place.Areas.Identity.Data.RegisterViewModel
+﻿@model RegisterViewModel
 @{
-    Layout = @"..\Shared\_Layout.cshtml";
+    ViewData["Title"] = "Register SalesMan";
 }
 
 <!-- BEGIN LOEADING -->
@@ -25,41 +25,45 @@
                 <h2 class="text-center m-b-20">ثبت نام </h2>
                 <hr>
 
-                <form id="advanced-form" method="post" action="#">
+                <form id="advanced-form" method="post" asp-area="Identity" asp-controller="AuthSalesMan" asp-action="Register">
                     <div class="form-group">
-                        <label class="sr-only control-label" for="username">نام کاربری</label>
+                        <label class="sr-only control-label" asp-for="UserName"></label>
                         <div class="input-group round">
                             <span class="input-group-addon">
                                 <i class="icon-user"></i>
                             </span>
-                            <input asp-area="Identity" asp-cotroller="Auth" asp-action="Register" type="text" class="form-control round" id="username" placeholder="نام کاربری">
+                            <input asp-for="UserName" type="text" class="form-control round" id="username" placeholder="نام کاربری">
+                            <span asp-validation-for="UserName" class="form-control"></span>
                         </div><!-- /.input-group-->
                     </div><!-- /.form-group -->
                     <div class="form-group">
-                        <label class="sr-only control-label" for="email">ایمیل</label>
+                        <label class="sr-only control-label" asp-for="Email"></label>
                         <div class="input-group round">
                             <span class="input-group-addon">
                                 <i class="icon-envelope"></i>
                             </span>
-                            <input asp-area="Identity" asp-controller="Auth" asp-action="Register" type="text" class="form-control round ltr text-left" id="email" name="email" placeholder="مثال:info@site.com">
+                            <input asp-for="Email" type="text" class="form-control round ltr text-left" id="email" placeholder="مثال:info@site.com">
+                            <span asp-validation-for="Email" class="form-control"></span>
                         </div><!-- /.input-group-->
                     </div><!-- /.form-group -->
                     <div class="form-group">
-                        <label class="sr-only control-label" for="password">رمز عبور</label>
+                        <label class="sr-only control-label" asp-for="Password"></label>
                         <div class="input-group round">
                             <span class="input-group-addon">
                                 <i class="icon-key"></i>
                             </span>
-                            <input asp-area="Identity" asp-controller="Auth" asp-action="Register" type="password" class="form-control round ltr text-left" id="password" name="password" placeholder="رمز عبور">
+                            <input asp-for="Password" type="password" class="form-control round ltr text-left" id="password" placeholder="رمز عبور">
+                            <span asp-validation-for="Password" class="form-control"></span>
                         </div><!-- /.input-group-->
                     </div><!-- /.form-group -->
                     <div class="form-group">
-                        <label class="sr-only control-label" for="confirm_password">تکرار رمز عبور</label>
+                        <label class="sr-only control-label" asp-for="ConfirmPassword"></label>
                         <div class="input-group round">
                             <span class="input-group-addon">
                                 <i class="icon-key"></i>
                             </span>
-                            <input asp-area="Identity" asp-controller="Auth" asp-action="Register" type="password" class="form-control round ltr text-left" id="confirm_password" name="confirm_password" placeholder="تکرار رمز عبور">
+                            <input asp-for="ConfirmPassword" type="password" class="form-control round ltr text-left" id="confirm_password" placeholder="تکرار رمز عبور">
+                            <span asp-validation-for="ConfirmPassword" class="form-control"></span>
                         </div><!-- /.input-group-->
                     </div><!-- /.form-group -->
                     <div class="form-group">
@@ -82,11 +86,11 @@
                 </form>
 
                 <hr class="m-b-30">
-                <a href="forget.html" class="btn btn-default btn-round btn-block m-b-10">
+                @*<a href="forget.html" class="btn btn-default btn-round btn-block m-b-10">
                     <i class="icon-refresh font-lg"></i>
                     بازیابی رمز عبور
-                </a>
-                <a href="login.html" class="btn btn-default btn-round btn-block">
+                </a>*@
+                <a href="/Identity/AuthSalesMan/Login" class="btn btn-default btn-round btn-block">
                     <i class="icon-user-follow font-lg"></i>
                     ثبت نام کرده اید؟ وارد شوید!
                 </a>

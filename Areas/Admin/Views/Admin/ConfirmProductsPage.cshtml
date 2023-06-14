@@ -1,0 +1,30 @@
+﻿@model List<App.Domain.Core.DTOs.ProductDto>
+@{
+}
+
+<div class="container">
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Name</th>
+                <th scope="col">Description</th>
+                <th scope="col">Operation</th>
+            </tr>
+        </thead>
+        <tbody>
+        @foreach (var t in Model)
+        {
+            <tr>
+                <th scope="row">@t.Id</th>
+                <td>@t.Name</td>
+                <td>@t.Description</td>
+                <td>
+                    <button class="btn btn-success" asp-area="Admin" asp-controller="Admin" asp-action="ConfirmProduct" asp-route-confirmed="true">Confirm</button>
+                    <button class="btn btn-warning" asp-area="Admin" asp-controller="Admin" asp-action="ConfirmProduct" asp-route-confirmed="false">Deny</button>
+                </td>
+            </tr>
+        }
+        </tbody>
+    </table>
+</div>

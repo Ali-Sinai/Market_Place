@@ -1,0 +1,27 @@
+﻿@model App.Domain.Core.DTOs.BidDto
+@{
+}
+
+<div class="container">
+    <h3>Create</h3>
+    <form class="form-control" asp-area="SalesMan" asp-controller="SalesMan" asp-action="CreateBid">
+        <label asp-for="@Model.ProductId"></label>
+        <input class="form-control" placeholder="Id of product" type="number"/>
+        <span asp-validation-for="ProductId"></span>
+        <br/>
+        <label asp-for="@Model.BasePrice"></label>
+        <input class="form-control" placeholder="Base Price" type="number"/>
+        <span asp-validation-for="BasePrice"></span>
+        <br/>
+        <label asp-for="@Model.OpeningTime"></label>
+        <input class="form-control" type="datetime"/>
+        <span asp-validation-for="OpeningTime"></span>
+        <br/>
+        <label asp-for="@Model.ClosingTime"></label>
+        <input class="form-control" type="datetime"/>
+        <span asp-validation-for="ClosingTime"></span>
+        <br/>
+        <input hidden asp-for="HighestPrice" value="@Model.BasePrice"/>
+        <button type="submit" class="btn btn-secondary"></button>
+    </form>
+</div>

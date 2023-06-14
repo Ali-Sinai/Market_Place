@@ -11,14 +11,14 @@ namespace Market_Place.Controllers
 	{
 		private readonly ILogger<HomeController> _logger;
 		private readonly IMemoryCache _memorychache;
-		private readonly MarketPlaceContext _dbcontext;
+		private readonly MarketPlaceContext _dbContext;
 
 
 		public HomeController(ILogger<HomeController> logger, IMemoryCache memorychache, MarketPlaceContext context)
 		{
 			_memorychache = memorychache;
 			_logger = logger;
-			_dbcontext = context;
+			_dbContext = context;
 		}
 
 		public IActionResult Index()
@@ -28,7 +28,7 @@ namespace Market_Place.Controllers
 				MemoryCacheEntryOptions cacheOptions = new MemoryCacheEntryOptions();
 				//cacheOptions.AbsoluteExpiration = DateTimeOffset.Now.AddSeconds(20);
 				cacheOptions.SlidingExpiration = TimeSpan.FromSeconds(8);
-				var value = _dbcontext.Admins.ToList();
+				var value = _dbContext.Admins.ToList();
 				_memorychache.Set("Admins", value);
 			}
 			return View();

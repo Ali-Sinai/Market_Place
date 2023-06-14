@@ -1,0 +1,35 @@
+﻿@model App.Domain.Core.DTOs.BidDto
+@{
+}
+
+<div class="container">
+    
+    <div class="row">
+        <div class="col-md-3">
+            <div class="container">
+                <img src="@Model.Product.ImageUrl"/>
+            </div>
+        </div>
+        <div class="col-md-9">
+            <h3>@Model.Product.Name</h3>
+            <p>@Model.Product.Description</p>
+            Base Price : <p class="text-black-50">@Model.BasePrice</p>
+        </div>
+    </div>
+    @if (Model.IsOpen)
+    {
+        <div>
+            <form class="form-control" asp-area="SalesMan" asp-controller="SalesMan" asp-action="GetHighestOffer" asp-route-bidId="@Model.Id">
+                <lable>Suggestion Price</lable>
+                <input type="number" class="form-control"/>
+                <button type="submit" class="btn btn-success" >Submit</button>
+            </form>
+        </div>
+    }
+    else
+    {
+        <div>
+                <button asp-area="SalesMan" asp-controller="SalesMan" asp-action="PayWage" asp-route-bidId="@Model.Id" asp-route-myId="@ViewBag.SalesManDto.Id">پرداخت کارمزد</button>
+        </div>
+    }
+</div>
