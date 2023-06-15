@@ -3,7 +3,6 @@
 }
 
 <div class="container">
-    
     <div class="row">
         <div class="col-md-3">
             <div class="container">
@@ -19,9 +18,9 @@
     @if (Model.IsOpen)
     {
         <div>
-            <form class="form-control" asp-area="SalesMan" asp-controller="SalesMan" asp-action="GetHighestOffer" asp-route-bidId="@Model.Id">
+            <form class="form-control" asp-area="SalesMan" asp-controller="SalesMan" asp-action="GetHighestOffer" asp-route-bidId="@Model.Id" asp-route-offer="offer">
                 <lable>Suggestion Price</lable>
-                <input type="number" class="form-control"/>
+                <input type="number" class="form-control" name="offer"/>
                 <button type="submit" class="btn btn-success" >Submit</button>
             </form>
         </div>
@@ -29,7 +28,7 @@
     else
     {
         <div>
-                <button asp-area="SalesMan" asp-controller="SalesMan" asp-action="PayWage" asp-route-bidId="@Model.Id" asp-route-myId="@ViewBag.SalesManDto.Id">پرداخت کارمزد</button>
+                <button asp-area="SalesMan" asp-controller="SalesMan" asp-action="PayWage" asp-route-bidId="@Model.Id" asp-route-myId="@ViewBag.User.Id">پرداخت کارمزد</button>
         </div>
     }
 </div>

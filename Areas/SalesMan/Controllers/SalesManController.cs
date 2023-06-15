@@ -24,21 +24,9 @@ namespace Market_Place.Areas.SalesMan.Controllers
 
         public async Task<IActionResult> Dashboard(CancellationToken cancellationToken)
         {
-            var salesManUsername = User.Identity.Name;
-            var list = await _salesManService.GetAll(cancellationToken);
-            var list2 =
-                from a in list
-                where a.UserName == salesManUsername
-                select a;
-            var salesManDto = _salesManService.MapToDto(list2.ToList().FirstOrDefault());
-            //ViewBag.SalesManDto = salesManDto;
-            var list3 = await _bidService.GetAll(cancellationToken);
-            var x =
-                from bid in list3
-                select bid;
-            var Bids = x.ToList()==null ? new List<Bid>() : x.ToList();
-            ViewBag.Bids = Bids;
-            return View(salesManDto);
+            ViewBag.User = await _salesManService.GetSalesManDto(User, cancellationToken);
+            ViewBag.Bids = await _salesManService.GetBidsList(User, cancellationToken);
+            return View();
         }
 
         [HttpGet]
@@ -67,22 +55,22 @@ namespace Market_Place.Areas.SalesMan.Controllers
             return p;
         }
 
-        public IActionResult OpenBid(int bidId, CancellationToken cancellationToken)
+        public async Task<IActionResult> OpenBid(int bidId, CancellationToken cancellationToken)
         {
-            _bidService.OpenBid(bidId, cancellationToken);
+            await _bidService.OpenBid(bidId, cancellationToken);
             return RedirectToAction("Dashboard");
         }
 
-        public IActionResult CloseBid(int bidId, CancellationToken cancellationToken)
+        public async Task<IActionResult> CloseBid(int bidId, CancellationToken cancellationToken)
         {
-            _bidService.CloseBid(bidId, cancellationToken);
+            await _bidService.CloseBid(bidId, cancellationToken);
             return RedirectToAction("Dashboard");
         }
 
         public async Task<IActionResult> BidDetails(int bidId, CancellationToken cancellationToken)
         {
-            var bid = await _bidService.GetBy(bidId, cancellationToken);
-            var bidDto = _bidService.MapToDto(bid);
+            var bidDto = _bidService.MapToDto(await _bidService.GetBy(bidId, cancellationToken));
+            ViewBag.User = await _salesManService.GetSalesManDto(User, cancellationToken);
             return View(bidDto);
         }
 
@@ -114,7 +102,8 @@ namespace Market_Place.Areas.SalesMan.Controllers
         public async Task<IActionResult> GetHighestOffer(int bidId, int offer, CancellationToken cancellationToken)
         {
             await _bidService.GetHighestOffer(bidId, offer, cancellationToken);
-            return RedirectToAction("BidDetails");
+            var bidDto = _bidService.MapToDto(await _bidService.GetBy(bidId, cancellationToken));
+            return RedirectToAction("BidDetails", new {bidDto});
         }
 
     }

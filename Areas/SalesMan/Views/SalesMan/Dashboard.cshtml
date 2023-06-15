@@ -1,18 +1,16 @@
-﻿@model App.Domain.Core.DTOs.SalesManDto;
-
-@{
+﻿@{
 }
 
 
 <!-- BEGIN LOEADING -->
-<div id="loader">
+@*<div id="loader">
     <div class="spinner"></div>
-</div><!-- /loader -->
+</div><!-- /loader -->*@
 <!-- END LOEADING -->
 <!-- BEGIN HEADER -->
 <div class="navbar navbar-fixed-top" id="main-navbar">
 <div class="header-right">
-    <a asp-area="Admin" asp-controller="Admin" asp-action="Dashboard" class="logo-con">
+    <a asp-area="SalesMan" asp-controller="SalesMan" asp-action="Dashboard" class="logo-con">
         <img src="~/assets/images/logo.png" class="img-responsive center-block" alt="لوگو قالب مدیران">
     </a>
 </div><!-- /.header-right -->
@@ -224,7 +222,7 @@
 <li class="dropdown dropdown-user">
     <a href="#" class="dropdown-toggle dropdown-hover" data-bs-toggle="dropdown">
         <img src="~/assets/images/user/48.png" alt="عکس پرفایل" class="img-circle img-responsive">
-        <span>@Model.UserName</span>
+        <span>@ViewBag.User.UserName</span>
         <i class="icon-arrow-down"></i>
     </a>
     <ul class="dropdown-menu">
@@ -291,7 +289,7 @@
             <img src="~/assets/images/user/128.png" alt="عکس پروفایل" class="img-circle img-responsive">
         </a>
         <div class="user-details">
-            <h4>@Model.UserName</h4>
+            <h4>@ViewBag.User.UserName</h4>
             <p class="role">مدیر فنی</p>
             <div class="dropdown user-login">
                 <button class="btn btn-xs btn-status dropdown-toggle btn-round" type="button" data-bs-toggle="dropdown" data-hover="dropdown">
@@ -914,15 +912,16 @@
                                             {
                                 <tr>
                                     <td><a asp-area="SalesMan" asp-controller="SalesMan" asp-action="BidDetails" asp-route-bidId="@item.Id">@item.Id</a></td>
+                                    <td>@item.Product.Name</td>
                                     <td>@item.HighestPrice</td>
                                     <td>
                                         @if (@item.IsOpen)
                                         {
-                                            <button class="btn btn-success" asp-area="SalesMan" asp-controller="SalesMan" asp-action="OpenBid">Open</button>
+                                            <button class="btn btn-success"><a asp-area="SalesMan" asp-controller="SalesMan" asp-action="CloseBid" asp-route-bidId="@item.Id">Close</a></button>
                                         }
                                         else
                                         {
-                                            <button class="btn btn-warning" asp-area="SalesMan" asp-controller="SalesMan" asp-action="CloseBid">Close</button>
+                                            <button class="btn btn-warning"><a asp-area="SalesMan" asp-controller="SalesMan" asp-action="OpenBid" asp-route-bidId="@item.Id">Open</a></button>
                                         }
                                     </td>
                                 </tr>

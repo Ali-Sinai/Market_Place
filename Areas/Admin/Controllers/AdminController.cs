@@ -39,7 +39,7 @@ namespace Market_Place.Areas.Admin.Controllers
                 where a.UserName == adminUsername
                 select a;
             var adminDto = _adminService.MapToDto(list2.ToList().FirstOrDefault());
-            ViewBag.AdminDto = adminDto;
+            ViewBag.User = adminDto;
             var commentList = new List<Comment>();
             commentList =  await _commentService.GetAllNotConfirmed(cancellationToken);
             ViewBag.CommentsNotConfirmed = commentList;
