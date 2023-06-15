@@ -28,7 +28,7 @@
     else
     {
         <div>
-                <button asp-area="SalesMan" asp-controller="SalesMan" asp-action="PayWage" asp-route-bidId="@Model.Id" asp-route-myId="@ViewBag.User.Id">پرداخت کارمزد</button>
+                    <button class="btn btn-secondary"><a asp-area="SalesMan" asp-controller="SalesMan" asp-action="PayWage" asp-route-bidId="@Model.Id" asp-route-myId="@ViewBag.User.Id">پرداخت کارمزد</a></button>
         </div>
     }
 </div>

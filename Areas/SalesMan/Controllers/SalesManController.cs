@@ -70,6 +70,7 @@ namespace Market_Place.Areas.SalesMan.Controllers
         public async Task<IActionResult> BidDetails(int bidId, CancellationToken cancellationToken)
         {
             var bidDto = _bidService.MapToDto(await _bidService.GetBy(bidId, cancellationToken));
+            //var bidDto = !(TempData["BidDto"] is BidDto) ? _bidService.MapToDto(await _bidService.GetBy(bidId, cancellationToken)) : TempData["BidDto"] as BidDto;
             ViewBag.User = await _salesManService.GetSalesManDto(User, cancellationToken);
             return View(bidDto);
         }
@@ -90,6 +91,7 @@ namespace Market_Place.Areas.SalesMan.Controllers
         {
             var bid = await _bidService.GetBy(bidId, cancellationToken);
             var money = await _salesManService.PayWage(myId, bid.HighestPrice, cancellationToken);
+            ViewBag.User = await _salesManService.GetSalesManDto(User, cancellationToken);
             return View(money);
         }
 
@@ -103,7 +105,7 @@ namespace Market_Place.Areas.SalesMan.Controllers
         {
             await _bidService.GetHighestOffer(bidId, offer, cancellationToken);
             var bidDto = _bidService.MapToDto(await _bidService.GetBy(bidId, cancellationToken));
-            return RedirectToAction("BidDetails", new {bidDto});
+            return RedirectToAction("BidDetails", new { bidId = bidDto.Id});
         }
 
     }
