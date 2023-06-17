@@ -10,7 +10,10 @@ using App.Domain.Service;
 using App.Domain.Core.Contracts.Repository;
 using App.Infrastructure.Repository.ef;
 using System.Security.Claims;
+using App.Domain.Core.Entities;
 using Market_Place.AutoMapper;
+using Bogus;
+using Microsoft.Extensions.Options;
 
 namespace Market_Place
 {
@@ -21,8 +24,10 @@ namespace Market_Place
             var builder = WebApplication.CreateBuilder(args);
 
             builder.Services.AddControllersWithViews();
+
             builder.Services.AddDbContext<MarketPlaceContext>(options =>
                 options.UseSqlServer(builder.Configuration.GetConnectionString("Database:ConnectionString")));
+            
             builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
             builder.Services.AddIdentity<IdentityUser<int>, IdentityRole<int>>()
@@ -57,9 +62,7 @@ namespace Market_Place
                 options.AddPolicy("ISSalesMan", policy => policy.RequireClaim("AuthorizedRole", "ISSalesMan"));
             });
 
-
             var app = builder.Build();
-
 
             // Configure the HTTP request pipeline.
             if (!app.Environment.IsDevelopment())

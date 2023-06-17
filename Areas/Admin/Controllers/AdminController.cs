@@ -57,11 +57,7 @@ namespace Market_Place.Areas.Admin.Controllers
                 new Product {Comments = new List<Comment>(), Description = "product 4", IsConfirmed = false, IsDeleted = false},
                 new Product {Comments = new List<Comment>(), Description = "product 5", IsConfirmed = false, IsDeleted = false},
             };
-            var list2 = new List<ProductDto>();
-            for (int i = 0; i < list.Count; i++)
-            {
-                list2[i] = _mapper.Map<ProductDto>(list[i]);
-            }
+            var list2 = list.Select(item => _productService.MapToDto(item, cancellationToken)).ToList();
             return View(list2);
         }
 
