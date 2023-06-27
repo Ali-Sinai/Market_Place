@@ -1,0 +1,23 @@
+﻿@{
+}
+
+<div class="container">
+    <div class="row">
+        <h2 class="text-center m-4">سبد خرید شما :)</h2>
+
+        @foreach (var item in ViewBag.Products)
+        {
+            <div class="card m-2" style="width: 15%;">
+                <a asp-controller="Home" asp-action="ProductDetail" asp-route-productId="@item.Id"><img src="@item.ImageUrl" class="card-img-top" alt="..."></a>
+                <div class="card-body text-center">
+                    <h5 class="card-title">@item.Name</h5>
+                    <p class="card-text" >قیمت : @item.Price</p>
+                </div>
+            </div>
+        }
+        @if (ViewBag.Products.Count != 0)
+        {
+            <button class="btn btn-outline-success"><a class="text-white" asp-area="Customer" asp-controller="Customer" asp-action="ClearFactor" asp-route-customerId="@ViewBag.User.Id">نهایی کردن سبد خرید</a></button>
+        }
+    </div>
+</div>

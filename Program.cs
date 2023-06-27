@@ -49,6 +49,7 @@ namespace Market_Place
             builder.Services.AddScoped<IBoothService, BoothService>();
             builder.Services.AddScoped<IBidRepository, BidRepository>();
             builder.Services.AddScoped<IBidService, BidService>();
+            builder.Services.AddScoped<IFactorRepository, FactorRepository>();
 
             builder.Services.AddAutoMapper(typeof(MappingProfile).Assembly);
 
@@ -91,7 +92,12 @@ namespace Market_Place
             app.MapAreaControllerRoute(
                 name: "areas",
                 areaName: "SalesMan",
-                pattern: "Identity/{controller}/{action}/{id?}");
+                pattern: "SalesMan/{controller}/{action}/{id?}");
+
+            app.MapAreaControllerRoute(
+                name: "areas",
+                areaName: "Customer",
+                pattern: "Customer/{controller}/{action}/{id?}");
 
             app.MapControllerRoute(
                 name: "default",

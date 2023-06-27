@@ -1,5 +1,6 @@
 ﻿@using Microsoft.AspNetCore.Identity
 @using Microsoft.AspNetCore.Mvc.TagHelpers
+@using Microsoft.CodeAnalysis.CSharp.Syntax
 @inject SignInManager<IdentityUser<int>> SignInManager
 @inject UserManager<IdentityUser<int>> UserManager
 <!DOCTYPE html>
@@ -14,7 +15,7 @@
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <nav class="navbar top-row navbar-expand-sm navbar-toggleable-sm border-bottom box-shadow mb-3">
             <div class="container-fluid">
                 <a class="navbar-brand" asp-controller="Home" asp-action="Index">Market_Place</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
@@ -24,13 +25,36 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-controller="Home" asp-action="Index">Home</a>
+                            <a class="btn btn-outline-primary" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                            <a class="btn btn-outline-primary" asp-controller="Home" asp-action="Privacy">Privacy</a>
                         </li>
                     </ul>
                     <partial name="_LoginPartial"/>
+                    <ul>
+                        @if (ViewBag.UserClaims.Count != 0)
+                        {
+                            @if (ViewBag.UserClaims[4] == "ISSalesMan")
+                            {
+                                <li class="nav-item">
+                                    <a class="btn btn-outline-primary" asp-area="SalesMan" asp-controller="SalesMan" asp-action="Dashboard" asp-route-user="@User">SalesMan panel</a>
+                                </li>
+                            }
+                            else if (ViewBag.UserClaims[4] == "ISAdmin")
+                            {
+                                <li class="nav-item">
+                                    <a class="btn btn-outline-primary" asp-area="Admin" asp-controller="Admin" asp-action="Dashboard" asp-route-user="@User">admin panel</a>
+                                </li>
+                            }
+                            else if (ViewBag.UserClaims[4] == "ISCustomer")
+                            {
+                                <li class="nav-item">
+                                    <a class="btn btn-outline-primary" asp-area="Customer" asp-controller="Customer" asp-action="Dashboard" asp-route-user="@User">customer panel</a>
+                                </li>
+                            }
+                        }
+                    </ul>
                 </div>
             </div>
         </nav>

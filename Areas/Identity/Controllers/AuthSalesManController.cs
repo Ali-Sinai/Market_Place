@@ -1,4 +1,5 @@
 ﻿using System.Security.Claims;
+using App.Domain.Core.Contracts.Service;
 using App.Domain.Core.DTOs;
 using AutoMapper;
 using Market_Place.Areas.Identity.Data;
@@ -12,13 +13,15 @@ namespace Market_Place.Areas.Identity.Controllers
     {
         private readonly UserManager<IdentityUser<int>> _userManager;
         private readonly SignInManager<IdentityUser<int>> _signInManager;
+        private readonly ISalesManService _salesManService;
         private readonly IMapper _mapper;
 
-        public AuthSalesManController(UserManager<IdentityUser<int>> userManager, SignInManager<IdentityUser<int>> signInManager, IMapper mapper)
+        public AuthSalesManController(UserManager<IdentityUser<int>> userManager, SignInManager<IdentityUser<int>> signInManager, IMapper mapper, ISalesManService salesManService)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _mapper = mapper;
+            _salesManService = salesManService;
         }
         
         [HttpGet]
@@ -55,7 +58,7 @@ namespace Market_Place.Areas.Identity.Controllers
         }
         
         [HttpPost]
-        public async Task<IActionResult> Register(RegisterViewModel viewModel)
+        public async Task<IActionResult> Register(RegisterViewModel viewModel, CancellationToken cancellationToken)
         {
             if (ModelState.IsValid)
             {
@@ -67,8 +70,9 @@ namespace Market_Place.Areas.Identity.Controllers
                     await _signInManager.SignInAsync(user, isPersistent: false);
                     var claim = new Claim("AuthorizedRole", "ISSalesMan");
                     await _userManager.AddClaimAsync(user, claim);
-                    var salesMan = _mapper.Map<SalesManDto>(user);
-                    return RedirectToAction("Dashboard", "SalesMan",new { salesMan });
+                    await _salesManService.AddToDb(_salesManService.MapToEntity(user), cancellationToken);
+                    //var salesMan = _mapper.Map<SalesManDto>(user);
+                    return RedirectToAction("Dashboard", "SalesMan",new {Area = "SalesMan" });
                 }
 
                 foreach (var i in result.Errors)

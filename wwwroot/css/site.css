@@ -1,5 +1,5 @@
 html {
-  font-size: 14px;
+    font-size: 14px;
     direction: rtl;
 }
 
@@ -19,5 +19,18 @@ html {
 }
 
 body {
-  margin-bottom: 60px;
+    margin-bottom: 60px;
+    background: #090c1e;
+    color: #fff;
+}
+
+.card {
+    background: #090c1e;
+    border-color: #14B9D6;
+    color: #fff;
+}
+
+.top-row {
+    color: #fff;
+    background: #090c1e;
 }

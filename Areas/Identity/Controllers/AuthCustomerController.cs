@@ -3,6 +3,7 @@ using Market_Place.Areas.Identity.Data;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
+using App.Domain.Core.Contracts.Service;
 using AutoMapper;
 
 namespace Market_Place.Areas.Identity.Controllers
@@ -12,13 +13,15 @@ namespace Market_Place.Areas.Identity.Controllers
     {
         private readonly UserManager<IdentityUser<int>> _userManager;
         private readonly SignInManager<IdentityUser<int>> _signInManager;
+        private readonly ICustomerService _customerService;
         private readonly IMapper _mapper;
 
-        public AuthCustomerController(UserManager<IdentityUser<int>> userManager, SignInManager<IdentityUser<int>> signInManager, IMapper mapper)
+        public AuthCustomerController(UserManager<IdentityUser<int>> userManager, SignInManager<IdentityUser<int>> signInManager, IMapper mapper, ICustomerService customerService)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _mapper = mapper;
+            _customerService = customerService;
         }
         
         [HttpGet]
@@ -38,7 +41,7 @@ namespace Market_Place.Areas.Identity.Controllers
 
                 if (result.Succeeded)
                 {
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("Index", "Home", new {Area = ""});
                 }
 
                 ModelState.AddModelError("", "ورود موفقیت امیز نبود");
@@ -55,7 +58,7 @@ namespace Market_Place.Areas.Identity.Controllers
         }
         
         [HttpPost]
-        public async Task<IActionResult> Register(RegisterViewModel viewModel)
+        public async Task<IActionResult> Register(RegisterViewModel viewModel, CancellationToken cancellationToken)
         {
             if (ModelState.IsValid)
             {
@@ -67,8 +70,8 @@ namespace Market_Place.Areas.Identity.Controllers
                     await _signInManager.SignInAsync(user, isPersistent: false);
                     var claim = new Claim("AuthorizedRole", "ISCustomer");
                     await _userManager.AddClaimAsync(user, claim);
-                    var customer = _mapper.Map<CustomerDto>(user);
-                    return RedirectToAction("Index", "Home");
+                    await _customerService.AddToDb(_customerService.MapToEntity(user), cancellationToken);
+                    return RedirectToAction("Index", "Home", new {Area = ""});
                 }
 
                 foreach (var i in result.Errors)

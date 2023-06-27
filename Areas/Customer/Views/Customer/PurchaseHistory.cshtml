@@ -1,0 +1,19 @@
+﻿@{
+}
+
+<div class="container">
+    <div class="row">
+        <h2 class="text-center m-4">All the products you have bought! right here :)</h2>
+
+        @foreach (var item in ViewBag.Products)
+        {
+                <div class="card m-2" style="width: 15%;">
+                    <a asp-controller="Home" asp-action="ProductDetail" asp-route-productId="@item.Id"><img src="@item.ImageUrl" class="card-img-top" alt="..."></a>
+                    <div class="card-body text-center">
+                        <h5 class="card-title">@item.Name</h5>
+                        <p class="card-text" >Price : @item.Price</p>
+                    </div>
+                </div>
+        }
+    </div>
+</div>

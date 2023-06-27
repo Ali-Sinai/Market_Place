@@ -32,14 +32,7 @@ namespace Market_Place.Areas.Admin.Controllers
 
         public async Task<IActionResult> Dashboard(CancellationToken cancellationToken)
         {
-            var adminUsername = User.Identity.Name;
-            var list = await _adminService.GetAll(cancellationToken);
-            var list2 =
-                from a in list
-                where a.UserName == adminUsername
-                select a;
-            var adminDto = _adminService.MapToDto(list2.ToList().FirstOrDefault());
-            ViewBag.User = adminDto;
+            ViewBag.User = _adminService.GetAdminDto(User, cancellationToken);
             var commentList = new List<Comment>();
             commentList =  await _commentService.GetAllNotConfirmed(cancellationToken);
             ViewBag.CommentsNotConfirmed = commentList;
@@ -63,7 +56,7 @@ namespace Market_Place.Areas.Admin.Controllers
 
         public async Task<IActionResult> ConfirmProduct(int productId, bool confirmed, CancellationToken cancellationToken)
         {
-            var product = await _productService.GetBy(productId, cancellationToken);
+            var product = await _productService.GetById(productId, cancellationToken);
             await _adminService.ConfirmSalesManeProducts(product, confirmed, cancellationToken);
             return RedirectToAction("ConfirmProductsPage");
         }
@@ -87,7 +80,7 @@ namespace Market_Place.Areas.Admin.Controllers
             return View();
         }
         [HttpPost]
-        public IActionResult EditCustomer(int customerId, Customer customer, CancellationToken cancellationToken)
+        public IActionResult EditCustomer(int customerId, App.Domain.Core.Entities.Customer customer, CancellationToken cancellationToken)
         {
             _adminService.EditCustomer(customerId, customer, cancellationToken);
             return View();

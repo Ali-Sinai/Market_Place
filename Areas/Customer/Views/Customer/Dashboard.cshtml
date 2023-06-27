@@ -1,6 +1,11 @@
-﻿@{
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
 }
 
+
+<!-- BEGIN LOEADING -->
 <!-- BEGIN WRAPPER -->
 <div id="wrapper">
 
@@ -70,13 +75,21 @@
     </a>
     <ul>
         <li>
-            <a asp-area="SalesMan" asp-controller="SalesMan" asp-action="CreateBid" class="current">
+            <a asp-area="Customer" asp-controller="Customer" asp-action="GetFactor" asp-route-customerId="@ViewBag.User.Id" class="current">
                 <i class="icon-home"></i>
-                <span>ایجاد مزایده</span>
+                <span>سبد خرید</span>
             </a>
-            <a asp-area="SalesMan" asp-controller="SalesMan" asp-action="CreateProduct" class="current">
+        </li>
+        <li>
+            <a asp-area="Customer" asp-controller="Customer" asp-action="EditProfile" asp-route-Id="@ViewBag.User.Id" class="current">
                 <i class="icon-home"></i>
-                <span>ایجاد محصول</span>
+                <span>ویرایش اطلاعات</span>
+            </a>
+        </li>
+        <li>
+            <a asp-area="Customer" asp-controller="Customer" asp-action="PurchaseHistory" asp-route-customerId="@ViewBag.User.Id" class="current">
+                <i class="icon-home"></i>
+                <span>تاریخچه خرید</span>
             </a>
         </li>
     </ul>
@@ -542,7 +555,6 @@
     </div><!-- /.col-lg-2 -->
 </div><!-- /.row -->
 
-
 <div class="row">
     <div class="col-md-6 col-xs-12">
         <div class="portlet box border shadow" display="None">
@@ -550,7 +562,7 @@
                 <div class="portlet-title">
                     <h3 class="title">
                         <i class="icon-pie-chart"></i>
-                        مزایده ها
+                        کامنت های تایید نشده
                     </h3>
                 </div><!-- /.portlet-title -->
                 <div class="buttons-box">
@@ -559,29 +571,17 @@
                     </a>
                     <div class="code-modal hide">
                         <!--
-                        // HTML
-                        <div id="donut" class="morris-chart"></div>
-
-                        //JS
-                        <script>
-                                                Morris.Donut({
-                                                    element: 'donut',
-                                                    data: [
-                                                        {value: 256, label: 'صبح', formatted: '256 نفر'},
-                                                        {value: 512, label: 'ظهر', formatted: '512 نفر'},
-                                                        {value: 1024, label: 'عصر', formatted: '1024 نفر'},
-                                                        {value: 2048, label: 'شب', formatted: '2048 نفر'}
-                                                    ],
-                                                        colors: [
-                                                        '#ffbd15',
-                                                        '#f55145',
-                                                        '#13a2a6',
-                                                        '#14B9D6'
-                                                    ],
-                                                    formatter: function (x, data) { return data.formatted; },
-                                                    resize: true
-                                                });
-                                            </script>
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th scope="col">ProductID</th>
+                                <th scope="col">Customer UserName</th>
+                                <th scope="col">Comment</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                        </tbody>
+                        </table>
                         -->
                     </div>
                     <a class="btn btn-sm btn-default btn-round btn-fullscreen" rel="tooltip" title="تمام صفحه" href="#">
@@ -593,72 +593,82 @@
                 </div><!-- /.buttons-box -->
             </div><!-- /.portlet-heading -->
 
-            <div class="portlet-body">
-                <div class="container">
-                    <table class="table">
-                        <thead>
-                        <tr>
-                            <th scope="col">Bid ID</th>
-                            <th scope="col">Product</th>
-                            <th scope="col">HighestPrice</th>
-                            <th scope="col">Operation</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                                            @foreach (var item in ViewBag.Bids)
-                                            {
-                                <tr>
-                                    <td><a asp-area="SalesMan" asp-controller="SalesMan" asp-action="BidDetails" asp-route-bidId="@item.Id">@item.Id</a></td>
-                                    <td>@item.Product.Name</td>
-                                    <td>@item.HighestPrice</td>
-                                    <td>
-                                        @if (@item.IsOpen)
-                                        {
-                                            <button class="btn btn-success"><a asp-area="SalesMan" asp-controller="SalesMan" asp-action="CloseBid" asp-route-bidId="@item.Id">Close</a></button>
-                                        }
-                                        else
-                                        {
-                                            <button class="btn btn-warning"><a asp-area="SalesMan" asp-controller="SalesMan" asp-action="OpenBid" asp-route-bidId="@item.Id">Open</a></button>
-                                        }
-                                    </td>
-                                </tr>
-                                            }
-                        </tbody>
-                    </table>
-                </div>
-            </div><!-- /.portlet-body -->
         </div><!-- /.portlet -->
     </div><!-- /.col-md-6 -->
 
     <div class="col-md-6 col-xs-12">
         <div class="portlet box border shadow">
+            <div class="portlet-heading">
+                <div class="portlet-title">
+                    <h3 class="title">
+                        <i class="icon-graph"></i>
+                        تعداد کلیکها
+                    </h3>
+                </div><!-- /.portlet-title -->
+                <div class="buttons-box">
+                    <a class="btn btn-sm btn-default btn-round btn-code" rel="tooltip" title="کدها" href="#">
+                        <i class="icon-arrow-left"></i><span>/</span><i class="icon-arrow-right"></i>
+                    </a>
+                    <div class="code-modal hide">
+                        <!--
+                        // HTML
+                        <div id="realtime" class="morris-chart"></div>
+
+                        //JS
+                        <script>
+                                                var ret = [];
+                                                inititializeData();
+                                                function inititializeData() {
+                                                    for (var x = 15; x > 0; x--) {
+                                                        currentDate = new Date();
+                                                        currentDate.setSeconds(currentDate.getSeconds()-x);
+                                                        var usefulTime = currentDate.getHours() + ":" + currentDate.getMinutes() + ":" + currentDate.getSeconds();
+                                                        ret.push({
+                                                            x: usefulTime,
+                                                            y: Math.floor(Math.random()*50+25)
+                                                        });
+                                                    }
+                                                    return ret;
+                                                }
+                                                function data() {
+                                                    var currentDate = new Date();
+                                                    var currentTime = currentDate.getHours() + ":" + currentDate.getMinutes() + ":" + currentDate.getSeconds();
+                                                    ret.push({
+                                                        x: currentTime,
+                                                        y: Math.floor(Math.random()*50+25)
+                                                    });
+                                                    ret.shift();
+                                                    return ret;
+                                                }
+                                                var graph = Morris.Line({
+                                                    element: 'realtime',
+                                                    data: data(0),
+                                                    xkey: 'x',
+                                                    ykeys: ['y'],
+                                                    labels: ['تعداد کلیک'],
+                                                    parseTime: false,
+                                                    ymin: 0,
+                                                    ymax: 100,
+                                                    hideHover: true,
+                                                    lineColors: ['#14B9D6']
+                                                });
+                                                function update() {
+                                                    graph.setData(data());
+                                                }
+                                                setInterval(update, 1000);
+                                            </script>
+                        -->
+                    </div>
+                    <a class="btn btn-sm btn-default btn-round btn-fullscreen" rel="tooltip" title="تمام صفحه" href="#">
+                        <i class="icon-size-fullscreen"></i>
+                    </a>
+                    <a class="btn btn-sm btn-default btn-round btn-close" rel="tooltip" title="بستن" href="#">
+                        <i class="icon-trash"></i>
+                    </a>
+                </div><!-- /.buttons-box -->
+            </div><!-- /.portlet-heading -->
             <div class="portlet-body">
-                <div class="container">
-                    <table class="table">
-                        <thead>
-                        <tr>
-                            <th scope="col">Product ID</th>
-                            <th scope="col">Name</th>
-                            <th scope="col">Price</th>
-                            <th scope="col">Operation</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        @foreach (var item in ViewBag.Products)
-                        {
-                            <tr>
-                                <td><a asp-area="SalesMan" asp-controller="SalesMan" asp-action="ProductDetail" asp-route-productId="@item.Id">@item.Id</a></td>
-                                <td>@item.Name</td>
-                                <td>@item.Price</td>
-                                <td>
-                                    <button class="btn btn-outline-success"><a  asp-area="SalesMan" asp-controller="SalesMan" asp-action="EditProduct" asp-route-productId="@item.Id">Edit</a></button>
-                                    <button class="btn btn-outline-danger"><a  asp-area="SalesMan" asp-controller="SalesMan" asp-action="DeleteProduct" asp-route-productId="@item.Id">Delete</a></button>
-                                </td>
-                            </tr>
-                        }
-                        </tbody>
-                    </table>
-                </div>
+                <div id="realtime" class="morris-chart"></div>
             </div><!-- /.portlet-body -->
         </div><!-- /.portlet -->
     </div><!-- /.col-md-6 -->

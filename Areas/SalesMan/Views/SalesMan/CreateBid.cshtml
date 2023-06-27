@@ -6,22 +6,37 @@
     <h3>Create</h3>
     <form class="form-control" asp-area="SalesMan" asp-controller="SalesMan" asp-action="CreateBid">
         <label asp-for="@Model.ProductId"></label>
-        <input class="form-control" placeholder="Id of product" type="number"/>
+        <input class="form-control input-group round" placeholder="Id of product" asp-for="ProductId" type="number"/>
         <span asp-validation-for="ProductId"></span>
         <br/>
+
         <label asp-for="@Model.BasePrice"></label>
-        <input class="form-control" placeholder="Base Price" type="number"/>
+        <input onchange="setHigh()" id="BasePrice" class="form-control input-group round" placeholder="Base Price" asp-for="BasePrice" type="number"/>
         <span asp-validation-for="BasePrice"></span>
         <br/>
+
         <label asp-for="@Model.OpeningTime"></label>
-        <input class="form-control" type="datetime"/>
+        <input class="form-control input-group round" asp-for="OpeningTime" type="datetime"/>
         <span asp-validation-for="OpeningTime"></span>
         <br/>
+
         <label asp-for="@Model.ClosingTime"></label>
-        <input class="form-control" type="datetime"/>
+        <input class="form-control input-group round" type="datetime" asp-for="ClosingTime"/>
         <span asp-validation-for="ClosingTime"></span>
         <br/>
-        <input hidden asp-for="HighestPrice" value="@Model.BasePrice"/>
-        <button type="submit" class="btn btn-secondary"></button>
+
+        <input hidden asp-for="HighestPrice" id="HighestPrice"/>
+        <input hidden asp-for="Id" value="0"/>
+
+        <button type="submit" class="btn btn-primary btn-round">Submit</button>
     </form>
 </div>
+
+<script>
+    function setHigh() {
+        var x = document.getElementById("BasePrice");
+        var y = document.getElementById("HighestPrice");
+        y.value = x.value;
+    }
+
+</script>

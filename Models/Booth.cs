@@ -9,7 +9,7 @@ public partial class Booth
 
     public string Name { get; set; } = null!;
 
-    public string? Decription { get; set; }
+    public string? Description { get; set; }
 
     public string? ImageUrl { get; set; }
 }

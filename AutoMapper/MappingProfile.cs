@@ -16,18 +16,28 @@ namespace Market_Place.AutoMapper
 
             CreateMap<Admin, AdminDto>();
             CreateMap<Customer, CustomerDto>();
-            CreateMap<SalesMan, SalesManDto>();
+            CreateMap<SalesMan, SalesManDto>()
+                .ForMember(dest => dest.BoothId, opt => opt.MapFrom(e => e.Booth.Id));
             CreateMap<Product, ProductDto>();
             CreateMap<Bid, BidDto>();
+
+            CreateMap<Admin, AppUserDto>()
+                .ForMember(dest => dest.BoothId, opt => opt.AllowNull());
+            CreateMap<Customer, AppUserDto>()
+                .ForMember(dest => dest.BoothId, opt => opt.AllowNull());
+            CreateMap<SalesMan, AppUserDto>()
+                .ForMember(dest => dest.BoothId, opt => opt.MapFrom(e => e.Id));
 
             CreateMap<IdentityUser<int>, AdminDto>()
                 .ForMember(dest => dest.Id, opt => opt.MapFrom(e => e.Id))
                 .ForMember(dest => dest.Email, opt => opt.MapFrom(e => e.Email))
                 .ForMember(dest => dest.UserName, opt => opt.MapFrom(e => e.UserName));
+            
             CreateMap<IdentityUser<int>, CustomerDto>()
                 .ForMember(dest => dest.Id, opt => opt.MapFrom(e => e.Id))
                 .ForMember(dest => dest.Email, opt => opt.MapFrom(e => e.Email))
                 .ForMember(dest => dest.UserName, opt => opt.MapFrom(e => e.UserName));
+            
             CreateMap<IdentityUser<int>, SalesManDto>()
                 .ForMember(dest => dest.Id, opt => opt.MapFrom(e => e.Id))
                 .ForMember(dest => dest.Email, opt => opt.MapFrom(e => e.Email))
