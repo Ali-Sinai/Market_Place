@@ -6,7 +6,7 @@
         @foreach (var item in Model)
         {
             <div class=" card w-25 h-100 m-5">
-                <a asp-controller="Home" asp-action="ProductDetail" asp-route-productId="@item.Id"><img class="rounded-circle rounded-end-5 rounded-start-5 small w-50 h-50" src="@item.ImageUrl"/></a>
+                <a asp-area="" asp-controller="Home" asp-action="ProductDetail" asp-route-productId="@item.Id"><img class="rounded-circle rounded-end-5 rounded-start-5 small w-50 h-50" src="@item.ImageUrl"/></a>
                 <h4 class="text-center">@item.Name</h4>
                 @if (item.IsConfirmed)
                 {

@@ -1,4 +1,7 @@
-﻿@{
+﻿@using App.Domain.Core.Entities
+@using System.Linq
+
+@{
 }
 <div class="container">
     <h2 class="text-center m-4">سبد خرید شما :)</h2>
@@ -11,13 +14,25 @@
                     <div class="card-body text-center">
                         <h5 class="card-title">@item.Name</h5>
                         <p class="card-text">قیمت : @item.Price</p>
+                        <p>خریداری شده به صورت عادی</p>
                     </div>
                 </div>
+            }
+            @foreach (var item in ViewBag.BidProducts)
+             {
+                 <div class="card m-2 d-inline-block" style="width: 15%;">
+                         <a asp-area="" asp-controller="Home" asp-action="ProductDetail" asp-route-productId="@item.ProductId"><img src="@item.Product.ImageUrl" class="card-img-top" alt="..."></a>
+                     <div class="card-body text-center">
+                         <h5 class="card-title">@item.Product.Name</h5>
+                             <p class="card-text">قیمت : @item.HighestPrice</p>
+                         <p>خریداری شده در مزایده</p>
+                     </div>
+                 </div>
             }
         </div>
         <div class="col-md-4">
             <p>مجموع : <span id="sum"></span></p>
-            @if (ViewBag.Products.Count != 0)
+            @if (ViewBag.Products.Count != 0 || ViewBag.BidProducts.Count != 0)
             {
                 <button class="btn btn-outline-success"><a class="text-white" asp-area="Customer" asp-controller="Customer" asp-action="ClearFactor" asp-route-customerId="@ViewBag.User.Id">نهایی کردن سبد خرید</a></button>
             }
@@ -42,7 +57,6 @@
         for (var i = 0; i < products.length; i++) {
             sum += parseFloat(products[i].price);
         }
-        document.getElementById("sum").innerHTML = sum;
     };
 </script>
 

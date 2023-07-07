@@ -7,13 +7,25 @@
 
         @foreach (var item in ViewBag.Products)
         {
-                <div class="card m-2" style="width: 15%;">
-                    <a asp-controller="Home" asp-action="ProductDetail" asp-route-productId="@item.Id"><img src="@item.ImageUrl" class="card-img-top" alt="..."></a>
-                    <div class="card-body text-center">
-                        <h5 class="card-title">@item.Name</h5>
-                        <p class="card-text" >Price : @item.Price</p>
-                    </div>
+            <div class="card m-2" style="width: 15%;">
+                <a asp-area="" asp-controller="Home" asp-action="ProductDetail" asp-route-productId="@item.Id"><img src="@item.ImageUrl" class="card-img-top" alt="..."></a>
+                <div class="card-body text-center">
+                    <h5 class="card-title">@item.Name</h5>
+                    <p class="card-text" >Price : @item.Price</p>
+                    <p>خریداری شده به صورت عادی</p>
                 </div>
+            </div>
         }
+        @foreach (var item in ViewBag.BidProducts)
+         {
+             <div class="card m-2" style="width: 15%;">
+                     <a asp-area="" asp-controller="Home" asp-action="ProductDetail" asp-route-productId="@item.ProductId"><img src="@item.Product.ImageUrl" class="card-img-top" alt="..."></a>
+                 <div class="card-body text-center">
+                     <h5 class="card-title">@item.Product.Name</h5>
+                         <p class="card-text" >Price : @item.HighestPrice</p>
+                     <p>خریداری شده در مزایده</p>
+                 </div>
+             </div>
+         }
     </div>
 </div>

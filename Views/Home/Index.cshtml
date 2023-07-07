@@ -20,7 +20,7 @@
                 <div class="card-body text-center">
                     <h5 class="card-title">@item.Name</h5>
                     <p class="card-text" >@item.Description</p>
-                    <a asp-controller="Home" asp-action="BoothDetail" asp-route-boothId="@item.Id" class="btn btn-outline-success">Go to booth</a>
+                    <a asp-area="" asp-controller="Home" asp-action="BoothDetail" asp-route-boothId="@item.Id" class="btn btn-outline-success">Go to booth</a>
                 </div>
             </div>
         }
@@ -32,7 +32,7 @@
         {
             <div class=" card m-1 border-0" style="width: 10%; height: 10%;">
                 <img class="rounded-circle rounded-end-5 rounded-start-5" src="@item.ImageUrl"/>
-                    <a asp-controller="Home" asp-action="CategoryProducts" asp-route-categoryId="@item.Id" class="text-decoration-none text-white"><h4 class="text-center">@item.Name</h4></a>
+                    <a asp-area="" asp-controller="Home" asp-action="CategoryProducts" asp-route-categoryId="@item.Id" class="text-decoration-none text-white"><h4 class="text-center">@item.Name</h4></a>
             </div>
         }
     </div>

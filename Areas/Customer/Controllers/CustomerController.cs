@@ -57,6 +57,7 @@ namespace Market_Place.Areas.Customer.Controllers
         public async Task<IActionResult> GetFactor(int customerId, CancellationToken cancellationToken)
         {
             ViewBag.Products = await _customerService.GetFactor(customerId, cancellationToken);
+            ViewBag.BidProducts = await _customerService.GetProductsBuyInBid(customerId, cancellationToken);
             ViewBag.User = await _customerService.GetCustomerDto(User, cancellationToken);
             return View();
         }
@@ -65,6 +66,7 @@ namespace Market_Place.Areas.Customer.Controllers
         {
             ViewBag.User = await _customerService.GetCustomerDto(User, cancellationToken);
             ViewBag.Products = await _customerService.GetPurchaseHistory(customerId, cancellationToken);
+            ViewBag.BidProducts = await _customerService.GetProductsBuyInBid(customerId, cancellationToken);
             return View();
         }
 

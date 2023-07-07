@@ -36,12 +36,12 @@
             <div class="col-md-8 col-lg-6">
                 <div class="card border-0">
                     <div class="card-body p-4">
-                        <form class="form-control mb-4 bg-transparent p-0" asp-area="Customer" asp-controller="Customer" asp-action="AddComment" asp-route-userId="@ViewBag.User.Id" asp-route-productId="@Model.Id">
+                        <form class="form-control mb-4 bg-transparent p-0" asp-area="Customer" asp-controller="Customer" asp-action="AddComment" asp-route-userId="@ViewBag.User.Id" asp-route-productId="@Model.ProductId">
                             <div class="input-group">
                                 <div class="input-group-prepend">
                                     <button class="btn btn-outline-primary m-3" type="submit">Submit</button>
                                 </div>
-                                <input type="text" class="form-control rounded-2 m-3" placeholder="متن کامنت">
+                                <input name="message" type="text" class="form-control rounded-2 m-3" placeholder="متن کامنت">
                             </div>
                         </form>
                         @foreach (var i in ViewBag.Comments)
