@@ -3,6 +3,7 @@ using App.Domain.Core.Entities;
 using App.Domain.Service;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading;
+using App.Domain.Core.Contracts.Repository;
 using App.Domain.Core.DTOs;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
@@ -14,12 +15,14 @@ namespace Market_Place.Areas.Customer.Controllers
         private readonly IBidService _bidService;
         private readonly ICustomerService _customerService;
         private readonly IProductService _productService;
+        private readonly ICommentRepository _commentRepository;
 
-        public CustomerController(IBidService bidService, ICustomerService customerService, IProductService productService)
+        public CustomerController(IBidService bidService, ICustomerService customerService, IProductService productService, ICommentRepository commentRepository)
         {
             _bidService = bidService;
             _customerService = customerService;
             _productService = productService;
+            _commentRepository = commentRepository;
         }
 
         public async Task<IActionResult> Dashboard(CancellationToken cancellationToken)
@@ -93,11 +96,13 @@ namespace Market_Place.Areas.Customer.Controllers
         {
             ViewBag.User = await _customerService.GetCustomerDto(User, cancellationToken);
             await _customerService.BuyNormal( ViewBag.User.Id, productId, cancellationToken);
-            return RedirectToAction("Index", "Home", new {Area = ""});
+            return RedirectToAction("GetFactor", new { customerId = ViewBag.User.Id});
         }
 
         public async Task<IActionResult> BidDetails(int bidId, CancellationToken cancellationToken)
         {
+            var b = _bidService.MapToDto(await _bidService.GetBy(bidId, cancellationToken));
+            ViewBag.Comments = await _commentRepository.GetAllForProduct(b.ProductId, cancellationToken);
             var bidDto = _bidService.MapToDto(await _bidService.GetBy(bidId, cancellationToken));
             //var bidDto = !(TempData["BidDto"] is BidDto) ? _bidService.MapToDto(await _bidService.GetBy(bidId, cancellationToken)) : TempData["BidDto"] as BidDto;
             ViewBag.User = await _customerService.GetCustomerDto(User, cancellationToken);

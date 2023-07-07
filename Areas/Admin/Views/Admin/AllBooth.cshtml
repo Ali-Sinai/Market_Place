@@ -3,28 +3,20 @@
 }
 
 <div class="container">
-    <table class="table">
-        <thead>
-        <tr>
-            <th scope="col">Booth ID</th>
-            <th scope="col">Name</th>
-            <th scope="col">Description</th>
-            <th scope="col">Operation</th>
-        </tr>
-        </thead>
-        <tbody>
+    <div class="row">
+        <h1 class="text-center text-white m-4">غرفه ها</h1>
         @foreach (var item in Model)
         {
-            <tr>
-                <td><a asp-area="Admin" asp-controller="Admin" asp-action="EditBooth">@item.Id</a></td>
-                <td>@item.Name</td>
-                <td>@item.Description</td>
-                <td>
-                    <button class="btn btn-success" asp-area="Admin" asp-controller="Admin" asp-action="EditBooth">Edit</button>
-                    <button class="btn btn-warning" asp-area="Admin" asp-controller="Admin" asp-action="DeleteBooth" asp-route-customerId="@item.Id">Delete</button>
-                </td>
-            </tr>
+            <div class="card m-2" style="width: 15%;">
+                <img src="@item.ImageUrl" class="card-img-top" alt="...">
+                <div class="card-body text-center">
+                    <h5 class="card-title">@item.Name</h5>
+                    <p class="card-text" >@item.Description</p>
+                    <a asp-area="" asp-controller="Home" asp-action="BoothDetail" asp-route-boothId="@item.Id" class="btn btn-success btn-block mt-4">Go to booth</a>
+                    <a class="btn btn-green btn-block mt-2" asp-area="Admin" asp-controller="Admin" asp-action="EditBooth" asp-route-boothId="@item.Id">Edit</a>
+                    <a class="btn btn-danger btn-block mt-2" asp-area="Admin" asp-controller="Admin" asp-action="DeleteBooth" asp-route-boothId="@item.Id">Delete</a>
+                </div>
+            </div>
         }
-        </tbody>
-    </table>
+    </div>
 </div>

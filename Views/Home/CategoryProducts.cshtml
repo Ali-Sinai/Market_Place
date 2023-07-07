@@ -1,0 +1,22 @@
+﻿@model List<App.Domain.Core.Entities.Product>
+@{
+}
+
+<div class="container">
+    <div class="row">
+        <h2 class="text-center m-4">@Model[0].SubCategory.Category.Name</h2>
+
+        @foreach (var item in Model)
+        {
+            <div class=" card w-25 h-100 m-5">
+                <img class="rounded-circle rounded-end-5 rounded-start-5 small w-50 h-50 m-auto" src="@item.ImageUrl"/>
+                <a asp-controller="Home" asp-action="ProductDetail" asp-route-productId="@item.Id" class="text-decoration-none text-white m-2"><h4 class="text-center">@item.Name</h4></a>
+                <a asp-area="Customer" asp-controller="Customer" asp-action="BuyProductNormal" asp-route-productId="@item.Id" class="btn btn-outline-success">Buy right now!</a>
+                <br/>
+                <a  class="btn btn-outline-info" asp-area="Customer" asp-controller="Customer" asp-action="CheckHasBid" asp-route-productId="@item.Id">Or suggest an offer!</a>
+                <br/>
+            </div>
+            
+        }
+    </div>
+</div>

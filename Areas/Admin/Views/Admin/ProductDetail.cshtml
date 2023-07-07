@@ -1,0 +1,21 @@
+﻿@model App.Domain.Core.DTOs.ProductDto
+@{
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-3">
+            @*<img src="@Model.ImageUrl"/>*@
+            <img class="img-thumbnail w-50 h-100" src="https://www.junglescout.com/wp-content/uploads/2021/01/product-photo-water-bottle-hero.png"/>
+        </div>
+        <div class="col-md-6">
+            <h3>@Model.Name</h3>
+            <p>@Model.Description</p>
+        </div>
+        <div class="col-md-3">
+            <h2>Price : @Model.Price</h2>
+            <button class="btn btn-outline-success"><a  asp-area="Admin" asp-controller="Admin" asp-action="EditProduct" asp-route-productId="@Model.Id">Edit</a></button>
+            <button class="btn btn-outline-danger"><a  asp-area="Admin" asp-controller="Admin" asp-action="DeleteProduct" asp-route-productId="@Model.Id">Delete</a></button>
+        </div>
+    </div>
+</div>

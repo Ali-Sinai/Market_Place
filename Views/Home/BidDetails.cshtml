@@ -8,13 +8,14 @@
     <div class="row">
         <div class="col-md-3">
             <div class="container">
-                <img src="@Model.Product.ImageUrl"/>
+                <img class="w-50 h-50 rounded-2" src="@Model.Product.ImageUrl"/>
             </div>
         </div>
         <div class="col-md-9">
             <h3>@Model.Product.Name</h3>
             <p>@Model.Product.Description</p>
-            Base Price : <p class="text-black-50">@Model.BasePrice</p>
+            <p>قیمت پایه : <span class="text-white">@Model.BasePrice</span></p>
+            <p>بالاترین قیمت پیشنهادی: <span class="text-white">@Model.HighestPrice</span></p>
         </div>
     </div>
     @if (Model.IsOpen)
@@ -23,7 +24,7 @@
         {
             <div>
                 <form class="form-control" asp-area="Customer" asp-controller="Customer" asp-action="BuyInBid" asp-route-bidId="@Model.Id" asp-route-offer="offer" asp-route-userId="@ViewBag.User.Id">
-                    <lable>Suggestion Price</lable>
+                    <lable>Suggest a price :</lable>
                     <input type="number" class="form-control" name="offer"/>
                     <button type="submit" class="btn btn-success" >Submit</button>
                 </form>
@@ -34,4 +35,45 @@
             <h4>Login to make a suggestion!</h4>
         }
     }
+    else
+    {
+        <p class="text-white">مزایده به اتمام رسیده است</p>
+    }
+    <div class="row">
+        <h4 class="text-center">Comments</h4>
+        <div class="row d-flex justify-content-center">
+            <div class="col-md-8 col-lg-6">
+                <div class="card border-0">
+                    <div class="card-body p-4">
+                        @if (SignInManager.IsSignedIn(User))
+                        {
+                            <form class="form-control mb-4 bg-transparent p-0" asp-area="Customer" asp-controller="Customer" asp-action="AddComment" asp-route-userId="@ViewBag.User.Id" asp-route-productId="@Model.Id">
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <button class="btn btn-outline-primary m-3" type="submit">Submit</button>
+                                    </div>
+                                    <input type="text" class="form-control rounded-2 m-3" placeholder="متن کامنت">
+                                </div>
+                            </form>
+                            
+                        }
+                        @foreach (var i in ViewBag.Comments)
+                        {
+                            <div class="card mb-4">
+                                <div class="card-body">
+                                    <p>@i.Message</p>
+                                    <div class="d-flex justify-content-between">
+                                        <div class="d-flex flex-row align-items-center">
+                                            <p class="small mb-0 ms-2">@i.Customer.UserName</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
 </div>

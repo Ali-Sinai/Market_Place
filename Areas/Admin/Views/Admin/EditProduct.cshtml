@@ -1,0 +1,56 @@
+﻿@model App.Domain.Core.Entities.Product
+@{
+}
+
+<div class="container">
+    <form id="form" asp-area="Admin" asp-controller="Admin" asp-action="EditProduct" class="form-control">
+        <label asp-for="Name"></label>
+
+        <input asp-for="Name" type="text" value="@Model.Name" class="form-control input-group round"/>
+        <br/>
+
+        <label asp-for="Description"></label>
+
+        <input asp-for="Description" class="form-control input-group round" value="@Model.Description"/>
+        <br/>
+
+        <label asp-for="Price"></label>
+
+        <input asp-for="Price" class="form-control input-group round" value="@Model.Price"/>
+        <br/>
+
+        <label asp-for="ImageUrl"></label>
+
+        <input asp-for="ImageUrl" class="form-control input-group round" value="@Model.ImageUrl"/>
+        <br/>
+
+        <label asp-for="SubCategory"></label>
+
+        <div class="dropdown">
+            @*<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                @Model.SubCategory.Name
+            </button>*@
+            <select onclick="clicked(value.Name)" class="btn btn-primary dropdown-toggle" id="dropdownMenuButton1" asp-for="SubCategoryId" asp-items="@(new SelectList(ViewBag.SubCategories, "Id", "Name"))"></select>
+        </div>        
+        <br/>
+        <input asp-for="Id" value="@Model.Id" hidden/>
+        <input asp-for="BidId" value="@Model.BidId" hidden/>
+        <input asp-for="Bid" value="@Model.Bid" hidden/>
+        <input asp-for="BoothId" value="@Model.BoothId" hidden/>
+        <input asp-for="Booth" value="@Model.Booth" hidden/>
+        <input asp-for="IsDeleted" value="@Model.IsDeleted" hidden/>
+        <input asp-for="IsConfirmed" value="@Model.IsConfirmed" hidden/>
+        <input asp-for="Factor" value="@Model.Factor" hidden/>
+
+        <button type="submit" class="btn btn-blue btn-round">submit</button>
+
+    </form>
+</div>
+
+                
+            
+<script>
+    function clicked(name) {
+        $("#dropdownMenuButton1").html(name);
+    }
+</script>

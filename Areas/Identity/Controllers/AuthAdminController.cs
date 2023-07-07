@@ -70,10 +70,9 @@ namespace Market_Place.Areas.Identity.Controllers
                     await _signInManager.SignInAsync(user, isPersistent: false);
                     var claim = new Claim("AuthorizedRole", "ISAdmin");
                     await _userManager.AddClaimAsync(user, claim);
-                    //var adminUser = await _adminService.GetBy(user.Email, CancellationToken.None);
-                    _adminService.MapToDto(user);
-                    var adminEntity = _adminService.MapToEntity(user);
-                    await _adminService.AddAdminToDb(adminEntity, CancellationToken.None);
+                    await _adminService.AddAdminToDb(_adminService.MapToEntity(user), CancellationToken.None);
+                    await _signInManager.SignOutAsync();
+                    await _signInManager.SignInAsync(user, isPersistent: false);
                     return RedirectToAction("Index", "Home", new {Area = ""});
                 }
 

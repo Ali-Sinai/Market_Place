@@ -1,0 +1,43 @@
+﻿@model App.Domain.Core.Entities.Booth
+@{
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-2">
+            <img src="@Model.ImageUrl" width="150"/>
+        </div>
+        <div class="col-md-10 d-flex flex-column justify-content-center">
+            <h3>@Model.Name</h3>
+            <p>@Model.Description</p>
+            <span>، میزان تخفیف : @ViewBag.Discount</span>
+        </div>
+    </div>
+    <hr/>
+    <h4>Products</h4>
+    <br/>
+    <div class="row">
+        @foreach (var item in ViewBag.BoothProducts)
+        {
+            <div class=" card w-25 h-100 m-5">
+                <a asp-controller="Home" asp-action="ProductDetail" asp-route-productId="@item.Id"><img class="rounded-circle rounded-end-5 rounded-start-5 small w-50 h-50" src="@item.ImageUrl"/></a>
+                <h4 class="text-center">@item.Name</h4>
+                @if (ViewBag.UserClaims[4] == "ISCustomer")
+                {
+                            <a asp-area="Customer" asp-controller="Customer" asp-action="BuyProductNormal" asp-route-productId="@item.Id" class="btn btn-outline-success">Buy right now!</a>
+                            <br/>
+                            <a  class="btn btn-outline-info" asp-area="Customer" asp-controller="Customer" asp-action="CheckHasBid" asp-route-productId="@item.Id">Or suggest an offer!</a>
+                            <br/>
+                }
+                @if (ViewBag.UserClaims[4] == "ISAdmin")
+                 {
+                             <a asp-area="Admin" asp-controller="Admin" asp-action="EditProduct" asp-route-productId="@item.Id" class="btn btn-outline-success">ویرایش</a>
+                     <br/>
+                                     <a  class="btn btn-outline-info" asp-area="Admin" asp-controller="Admin" asp-action="DeleteProduct" asp-route-productId="@item.Id">حذف</a>
+                     <br/>
+                 }
+            </div>
+            
+        }
+    </div>
+</div>

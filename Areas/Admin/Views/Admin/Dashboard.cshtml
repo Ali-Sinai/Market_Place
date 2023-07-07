@@ -75,51 +75,21 @@
     </a>
     <ul>
         <li>
-            <a asp-area="Admin" asp-controller="Admin" asp-action="EditCustomer" class="current">
+            <a asp-area="Admin" asp-controller="Admin" asp-action="AllCustomers" class="">
                 <i class="icon-home"></i>
-                <span>ویرایش خریدار</span>
+                <span> خریداران</span>
             </a>
         </li>
         <li>
-            <a asp-area="Admin" asp-controller="Admin" asp-action="DeleteCustomer" class="">
+            <a asp-area="Admin" asp-controller="Admin" asp-action="AllBooth" class="">
                 <i class="icon-home"></i>
-                <span>حذف خریدار</span>
+                <span>غرفه ها</span>
             </a>
         </li>
         <li>
-            <a asp-area="Admin" asp-controller="Admin" asp-action="EditBooth" class="">
+            <a asp-area="Admin" asp-controller="Admin" asp-action="AllProducts" class="">
                 <i class="icon-home"></i>
-                <span>ویرایش غرفه</span>
-            </a>
-        </li>
-        <li>
-            <a asp-area="Admin" asp-controller="Admin" asp-action="DeleteBooth" class="">
-                <i class="icon-home"></i>
-                <span>حذف غرفه</span>
-            </a>
-        </li>
-        <li>
-            <a asp-area="Admin" asp-controller="Admin" asp-action="EditProduct" class="">
-                <i class="icon-home"></i>
-                <span>ویرایش محصول</span>
-            </a>
-        </li>
-        <li>
-            <a asp-area="Admin" asp-controller="Admin" asp-action="DeleteProduct" class="">
-                <i class="icon-home"></i>
-                <span>حذف محصول</span>
-            </a>
-        </li>
-        <li>
-            <a asp-area="Admin" asp-controller="Admin" asp-action="ConfirmProductsPage" class="">
-                <i class="icon-home"></i>
-                <span>تایید یا رد محصولات</span>
-            </a>
-        </li>
-        <li>
-            <a asp-area="Admin" asp-controller="Admin" asp-action="ConfirmComment" class="">
-                <i class="icon-home"></i>
-                <span>تایید یا رد کامنت ها</span>
+                <span>محصول ها</span>
             </a>
         </li>
     </ul>
@@ -599,29 +569,6 @@
                     <a class="btn btn-sm btn-default btn-round btn-code" rel="tooltip" title="کدها" href="#">
                         <i class="icon-arrow-left"></i><span>/</span><i class="icon-arrow-right"></i>
                     </a>
-                    <div class="code-modal hide">
-                        <!--
-                        <table class="table">
-                            <thead>
-                            <tr>
-                                <th scope="col">ProductID</th>
-                                <th scope="col">Customer UserName</th>
-                                <th scope="col">Comment</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            @foreach (var item in ViewBag.CommentsNotConfirmed)
-                            {
-                                <tr>
-                                    <td>@item.Id</td>
-                                    <td>@item.CustomerId</td>
-                                        <td>@item.Message</td>
-                                </tr>
-                            }
-                        </tbody>
-                        </table>
-                        -->
-                    </div>
                     <a class="btn btn-sm btn-default btn-round btn-fullscreen" rel="tooltip" title="تمام صفحه" href="#">
                         <i class="icon-size-fullscreen"></i>
                     </a>
@@ -636,8 +583,8 @@
                     <table class="table">
                         <thead>
                         <tr>
-                            <th scope="col">ProductID</th>
-                            <th scope="col">Customer UserName</th>
+                            <th scope="col">Comment ID</th>
+                            <th scope="col">Product Name</th>
                             <th scope="col">Comment</th>
                             <th scope="col">Operation</th>
                         </tr>
@@ -647,11 +594,11 @@
                         {
                             <tr>
                                 <td>@item.Id</td>
-                                <td>@item.CustomerId</td>
-                                <td>@item.Message</td>
+                                <td>@item.Product.Name</td>
+                                <td>@(item.Message.Length < 20 ? item.Message : item.Message.Substring(0, 20))</td>
                                 <td>
-                                    <button class="btn btn-success" asp-area="Admin" asp-controller="Admin" asp-action="ConfirmProduct" asp-route-confirmed="true">Confirm</button>
-                                    <button class="btn btn-warning" asp-area="Admin" asp-controller="Admin" asp-action="ConfirmProduct" asp-route-confirmed="false">Deny</button>
+                                    <a class="btn btn-success" asp-area="Admin" asp-controller="Admin" asp-action="ConfirmComment" asp-route-commentId="@item.Id" asp-route-confirmed="true">Confirm</a>
+                                    <a class="btn btn-warning" asp-area="Admin" asp-controller="Admin" asp-action="ConfirmComment" asp-route-commentId="@item.Id" asp-route-confirmed="false">Deny</a>
                                 </td>
                             </tr>
                         }
@@ -668,63 +615,13 @@
                 <div class="portlet-title">
                     <h3 class="title">
                         <i class="icon-graph"></i>
-                        تعداد کلیکها
+                        محصول های تایید نشده
                     </h3>
                 </div><!-- /.portlet-title -->
                 <div class="buttons-box">
                     <a class="btn btn-sm btn-default btn-round btn-code" rel="tooltip" title="کدها" href="#">
                         <i class="icon-arrow-left"></i><span>/</span><i class="icon-arrow-right"></i>
                     </a>
-                    <div class="code-modal hide">
-                        <!--
-                        // HTML
-                        <div id="realtime" class="morris-chart"></div>
-
-                        //JS
-                        <script>
-                                                var ret = [];
-                                                inititializeData();
-                                                function inititializeData() {
-                                                    for (var x = 15; x > 0; x--) {
-                                                        currentDate = new Date();
-                                                        currentDate.setSeconds(currentDate.getSeconds()-x);
-                                                        var usefulTime = currentDate.getHours() + ":" + currentDate.getMinutes() + ":" + currentDate.getSeconds();
-                                                        ret.push({
-                                                            x: usefulTime,
-                                                            y: Math.floor(Math.random()*50+25)
-                                                        });
-                                                    }
-                                                    return ret;
-                                                }
-                                                function data() {
-                                                    var currentDate = new Date();
-                                                    var currentTime = currentDate.getHours() + ":" + currentDate.getMinutes() + ":" + currentDate.getSeconds();
-                                                    ret.push({
-                                                        x: currentTime,
-                                                        y: Math.floor(Math.random()*50+25)
-                                                    });
-                                                    ret.shift();
-                                                    return ret;
-                                                }
-                                                var graph = Morris.Line({
-                                                    element: 'realtime',
-                                                    data: data(0),
-                                                    xkey: 'x',
-                                                    ykeys: ['y'],
-                                                    labels: ['تعداد کلیک'],
-                                                    parseTime: false,
-                                                    ymin: 0,
-                                                    ymax: 100,
-                                                    hideHover: true,
-                                                    lineColors: ['#14B9D6']
-                                                });
-                                                function update() {
-                                                    graph.setData(data());
-                                                }
-                                                setInterval(update, 1000);
-                                            </script>
-                        -->
-                    </div>
                     <a class="btn btn-sm btn-default btn-round btn-fullscreen" rel="tooltip" title="تمام صفحه" href="#">
                         <i class="icon-size-fullscreen"></i>
                     </a>
@@ -734,7 +631,32 @@
                 </div><!-- /.buttons-box -->
             </div><!-- /.portlet-heading -->
             <div class="portlet-body">
-                <div id="realtime" class="morris-chart"></div>
+                <div class="container">
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th scope="col">ProductID</th>
+                            <th scope="col">Name</th>
+                            <th scope="col">Price</th>
+                            <th scope="col">Operation</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                                            @foreach (var item in ViewBag.ProductsNotConfirmed)
+                                            {
+                                <tr>
+                                    <td>@item.Id</td>
+                                    <td>@item.Name</td>
+                                    <td>@item.Price</td>
+                                    <td>
+                                        <a class="btn btn-success" asp-area="Admin" asp-controller="Admin" asp-action="ConfirmProduct" asp-route-productId="@item.Id" asp-route-confirmed="true">Confirm</a>
+                                        <a class="btn btn-warning" asp-area="Admin" asp-controller="Admin" asp-action="ConfirmProduct" asp-route-productId="@item.Id" asp-route-confirmed="false">Deny</a>
+                                    </td>
+                                </tr>
+                                            }
+                        </tbody>
+                    </table>
+                </div>
             </div><!-- /.portlet-body -->
         </div><!-- /.portlet -->
     </div><!-- /.col-md-6 -->

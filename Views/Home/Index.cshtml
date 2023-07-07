@@ -32,7 +32,7 @@
         {
             <div class=" card m-1 border-0" style="width: 10%; height: 10%;">
                 <img class="rounded-circle rounded-end-5 rounded-start-5" src="@item.ImageUrl"/>
-                <h4 class="text-center">@item.Name</h4>
+                    <a asp-controller="Home" asp-action="CategoryProducts" asp-route-categoryId="@item.Id" class="text-decoration-none text-white"><h4 class="text-center">@item.Name</h4></a>
             </div>
         }
     </div>
@@ -44,7 +44,7 @@
             @if (item != null && item.Product != null)
             {
                 <div class=" card m-1 border-0" style="width: 13%;">
-                    <a asp-area=""><img class="rounded-circle rounded-end-5 rounded-start-5 card-img-top" src="@item.Product.ImageUrl"/></a>
+                    <a asp-area="" asp-controller="Home" asp-action="BidDetails" asp-route-bidId="@item.Id"><img class="rounded-circle rounded-end-5 rounded-start-5 card-img-top" src="@item.Product.ImageUrl"/></a>
                     <div class="card-body text-center">
                         <h4 class="text-center">@item.Product.Name</h4>
                         <p>Starts from : <span>@item.BasePrice $</span></p>

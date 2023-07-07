@@ -92,8 +92,6 @@ namespace Market_Place.Controllers
         {
             var b = await _boothService.GetById(boothId, cancellationToken);
             ViewBag.BoothProducts = await _productService.GetByBoothId(boothId, cancellationToken);
-
-
             List<string> userClaims = new List<string>();
             var claims = User.Claims;
             if (claims != null)
@@ -123,14 +121,56 @@ namespace Market_Place.Controllers
         public async Task<IActionResult> BidDetails(int bidId, CancellationToken cancellationToken)
         {
             var b = _bidService.MapToDto(await _bidService.GetBy(bidId, cancellationToken));
+            ViewBag.Comments = await _commentRepository.GetAllForProduct(b.ProductId, cancellationToken);
             ViewBag.User = await _customerService.GetCustomerDto(User, cancellationToken);
+            List<string> userClaims = new List<string>();
+            var claims = User.Claims;
+            if (claims != null)
+            {
+                foreach (var claim in claims)
+                {
+                    userClaims.Add(claim.Value);
+                }
+                ViewBag.UserClaims = userClaims;
+            }
+            else
+            {
+                ViewBag.UserClaims = new List<string>();
+            }
 
+            if (ViewBag.UserClaims.Count != 0)
+            {
+                ViewBag.User = ViewBag.UserClaims[4] == "ISCustomer" ? await _customerService.GetCustomerDto(User, cancellationToken) :
+                    (ViewBag.UserClaims[4] == "ISAdmin" ? await _adminService.GetAdminDto(User, cancellationToken) :
+                        await _salesManService.GetSalesManDto(User, cancellationToken));
+            }
             return View(b);
         }
 
         public async Task<IActionResult> AllBooth(CancellationToken cancellationToken)
         {
             ViewBag.Booths = await _boothService.GetAll(cancellationToken);
+            List<string> userClaims = new List<string>();
+            var claims = User.Claims;
+            if (claims != null)
+            {
+                foreach (var claim in claims)
+                {
+                    userClaims.Add(claim.Value);
+                }
+                ViewBag.UserClaims = userClaims;
+            }
+            else
+            {
+                ViewBag.UserClaims = new List<string>();
+            }
+
+            if (ViewBag.UserClaims.Count != 0)
+            {
+                ViewBag.User = ViewBag.UserClaims[4] == "ISCustomer" ? await _customerService.GetCustomerDto(User, cancellationToken) :
+                    (ViewBag.UserClaims[4] == "ISAdmin" ? await _adminService.GetAdminDto(User, cancellationToken) :
+                        await _salesManService.GetSalesManDto(User, cancellationToken));
+            }
             return View();
 
         }
@@ -164,6 +204,33 @@ namespace Market_Place.Controllers
             return View(p);
         }
 
+        public async Task<IActionResult> CategoryProducts(int categoryId, CancellationToken cancellationToken)
+        {
+            var list = await _productService.GetByCategory(categoryId, cancellationToken);
+            List<string> userClaims = new List<string>();
+            var claims = User.Claims;
+            if (claims != null)
+            {
+                foreach (var claim in claims)
+                {
+                    userClaims.Add(claim.Value);
+                }
+                ViewBag.UserClaims = userClaims;
+            }
+            else
+            {
+                ViewBag.UserClaims = new List<string>();
+            }
+
+            if (ViewBag.UserClaims.Count != 0)
+            {
+                ViewBag.User = ViewBag.UserClaims[4] == "ISCustomer" ? await _customerService.GetCustomerDto(User, cancellationToken) :
+                    (ViewBag.UserClaims[4] == "ISAdmin" ? await _adminService.GetAdminDto(User, cancellationToken) :
+                        await _salesManService.GetSalesManDto(User, cancellationToken));
+            }
+            return View(list);
+        }
+
         public IActionResult Privacy()
 		{
 			return View();
@@ -172,7 +239,7 @@ namespace Market_Place.Controllers
 		[ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
 		public IActionResult Error()
 		{
-			return View(new Market_Place.Models.ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+			return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
 		}
 	}
 }

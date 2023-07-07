@@ -1,5 +1,58 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model App.Domain.Core.Entities.Customer
 @{
 }
+
+<div class="container">
+    <form id="form" asp-area="Admin" asp-controller="Admin" asp-action="EditCustomer" class="form-control">
+        <label asp-for="UserName"></label>
+
+        <input asp-for="UserName" type="text" value="@Model.UserName" class="form-control input-group round" readonly/>
+        <br/>
+
+        <label asp-for="FirstName"></label>
+
+        <input asp-for="FirstName" class="form-control input-group round" value="@Model.FirstName"/>
+        <br/>
+
+        <label asp-for="LastName"></label>
+
+        <input asp-for="LastName" class="form-control input-group round" value="@Model.LastName"/>
+        <br/>
+
+        <label asp-for="Email"></label>
+
+        <input asp-for="Email" class="form-control input-group round" value="@Model.Email"/>
+        <br/>
+
+        <label asp-for="Address"></label>
+
+        <input asp-for="Address" class="form-control input-group round" value="@Model.Address"/>
+        <br/>
+
+        <label asp-for="BirthDate"></label>
+
+        <input asp-for="BirthDate" type="datetime" class="form-control input-group round" value="@Model.BirthDate"/>
+        <br/>
+
+        <label asp-for="PhoneNumber"></label>
+
+        <input asp-for="PhoneNumber" class="form-control input-group round" value="@Model.PhoneNumber"/>
+        <br/>
+
+        <label asp-for="CardNumber"></label>
+
+        <input asp-for="CardNumber" class="form-control input-group round" value="@Model.CardNumber"/>
+        <br/>
+
+        <label asp-for="ShebaNumber"></label>
+
+        <input asp-for="ShebaNumber" class="form-control input-group round" value="@Model.ShebaNumber"/>
+        <br/>
+
+        <input asp-for="RegisterDate" type="datetime" hidden value="@Model.RegisterDate"/>
+
+        <button type="submit" class="btn btn-blue btn-round">submit</button>
+
+    </form>
+    <a class="btn btn-danger" asp-area="Admin" asp-controller="Admin" asp-action="DeleteCustomer" asp-route-customerId="@Model.Id">حذف خریدار</a>
+</div>

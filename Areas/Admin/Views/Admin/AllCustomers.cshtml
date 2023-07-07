@@ -3,28 +3,18 @@
 }
 
 <div class="container">
-        <table class="table">
-        <thead>
-        <tr>
-        <th scope="col">Customer ID</th>
-        <th scope="col">Name</th>
-        <th scope="col">UserName</th>
-        <th scope="col">Operation</th>
-        </tr>
-        </thead>
-        <tbody>
-         @foreach (var item in Model)
-         {
-             <tr>
-                 <td><a asp-area="Admin" asp-controller="Admin" asp-action="EditCustomer">@item.Id</a></td>
-                 <td>@item.FirstName @item.LastName</td>
-                 <td>@item.UserName</td>
-                 <td>
-                     <button class="btn btn-success" asp-area="Admin" asp-controller="Admin" asp-action="EditCustomer">Edit</button>
-                     <button class="btn btn-warning" asp-area="Admin" asp-controller="Admin" asp-action="DeleteCustomer" asp-route-customerId="@item.Id">Delete</button>
-                 </td>
-             </tr>
-         }
-    </tbody>
-    </table>
+    <div class="row">
+        <h1 class="text-center text-white m-4">خریداران</h1>
+        @foreach (var item in Model)
+        {
+            <div class="card m-3" style="width: 18rem;">
+                <div class="card-body">
+                    <h5 class="card-title">@item.UserName</h5>
+                    <h6 class="card-subtitle mb-2 text-white-50">ساخته شده در @item.RegisterDate</h6>
+                    <a class="btn btn-outline-success" asp-area="Admin" asp-controller="Admin" asp-action="EditCustomer" asp-route-customerId="@item.Id">ویرایش</a>
+                    <a class="btn btn-outline-danger" asp-area="Admin" asp-controller="Admin" asp-action="DeleteCustomer" asp-route-customerId="@item.Id">حذف</a>
+                </div>
+            </div>
+        }
+    </div>
 </div>

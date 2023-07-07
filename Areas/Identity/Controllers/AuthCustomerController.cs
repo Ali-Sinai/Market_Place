@@ -71,6 +71,8 @@ namespace Market_Place.Areas.Identity.Controllers
                     var claim = new Claim("AuthorizedRole", "ISCustomer");
                     await _userManager.AddClaimAsync(user, claim);
                     await _customerService.AddToDb(_customerService.MapToEntity(user), cancellationToken);
+                    await _signInManager.SignOutAsync();
+                    await _signInManager.SignInAsync(user, isPersistent: false);
                     return RedirectToAction("Index", "Home", new {Area = ""});
                 }
 

@@ -2,22 +2,18 @@
 @inject SignInManager<IdentityUser<int>> SignInManager
 @inject UserManager<IdentityUser<int>> UserManager
 
-<ul class="navbar-nav">
+<ul class="navbar-nav m-2 p-0">
 @if (SignInManager.IsSignedIn(User))
 {
-    <li class="nav-item">
-        <div> Hello @User.Identity.Name !</div>
-        @*<a  class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @User.Identity?.Name!</a>*@
-    </li>
-    <li class="nav-item">
-        <a class="btn btn-outline-info" asp-area="Identity" asp-controller="Logout" asp-action="LogOut"></a>
+    <li class="nav-item my-auto">
+        <a class="btn btn-outline-info me-2" asp-area="Identity" asp-controller="Logout" asp-action="LogOut">Logout</a>
     </li>
 }
 else
 {
-    <li class="nav-item">
+    <li class="nav-item m-2">
         <div class="dropdown">
-            <button class="btn btn-warning dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <button class="btn btn-warning dropdown-toggle m-auto" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                 Register
             </button>
             <ul class="dropdown-menu">
@@ -27,9 +23,9 @@ else
             </ul>
         </div>
     </li>
-    <li class="nav-item">
+    <li class="nav-item m-2">
         <div class="dropdown">
-            <button class="btn btn-success dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <button class="btn btn-success dropdown-toggle m-auto" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                 Login
             </button>
             <ul class="dropdown-menu">
