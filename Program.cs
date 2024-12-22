@@ -23,6 +23,7 @@ namespace Market_Place
         {
             var builder = WebApplication.CreateBuilder(args);
 
+            
             builder.Services.AddControllersWithViews();
 
             builder.Services.AddDbContext<MarketPlaceContext>(options =>

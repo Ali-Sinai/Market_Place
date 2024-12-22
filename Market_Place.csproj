@@ -36,10 +36,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\App.Domain.Core.Entities\App.Domain.Core.csproj" />
-    <ProjectReference Include="..\App.Domain.Service\App.Domain.Service.csproj" />
-    <ProjectReference Include="..\App.Infrastructur.Data.SqlServer\App.Infrastructure.Data.SqlServer.csproj" />
-    <ProjectReference Include="..\App.Infrastructure.Repository.ef\App.Infrastructure.Repository.ef.csproj" />
+    <ProjectReference Include=".\App.Domain.Core.Entities\App.Domain.Core.csproj" />
+    <ProjectReference Include=".\App.Domain.Service\App.Domain.Service.csproj" />
+    <ProjectReference Include=".\App.Infrastructur.Data.SqlServer\App.Infrastructure.Data.SqlServer.csproj" />
+    <ProjectReference Include=".\App.Infrastructure.Repository.ef\App.Infrastructure.Repository.ef.csproj" />
   </ItemGroup>
 
   <ItemGroup>
